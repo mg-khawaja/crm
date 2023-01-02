@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:datatemplateselectors="clr-namespace:CrmStepMobileApp.DataTemplateSelectors"
+             xmlns:convertors="clr-namespace:CrmStepMobileApp.Convertors"
+             mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="MediumGrayColor">#DBDFEA</Color>
+            <Color x:Key="WhiteColor">#F3F6FB</Color>
+            <Color x:Key="DarkGrayColor">#DEE2E5</Color>
+            <Color x:Key="ThemeColor">#4990E2</Color>
+            <Color x:Key="DarkThemeColor">#2068BB</Color>
+           <Color x:Key="BlackColor">#333C40</Color>
+
+
+            <Color x:Key="MeetingColor">#6818CE</Color>
+            <Color x:Key="CallColor">#D83127</Color>
+            <Color x:Key="TaskColor">#29B149</Color>
+
+
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="Montserrat_Bold_Key">
+                <On Platform="Android" Value="Montserrat-Bold.otf#Montserrat-Bold" />
+                <On Platform="iOS" Value="Montserrat-Bold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="Montserrat_Medium_Key">
+                <On Platform="Android" Value="Montserrat-Medium.otf#Montserrat-Medium" />
+                <On Platform="iOS" Value="Montserrat-Medium" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="Montserrat_Regular_Key">
+                <On Platform="Android" Value="Montserrat-Regular.otf#Montserrat-Regular" />
+                <On Platform="iOS" Value="Montserrat-Regular" />
+            </OnPlatform>
+
+            <convertors:ToViewDateTimeConvertor x:Key="ToViewDateTimeConvertor"/>
+            <convertors:ListIconConvertor x:Key="ListIconConvertor"/>
+            <convertors:StringFormatConvertor x:Key="StringFormatConvertor"/>
+            <convertors:TextFontSizeConvertor x:Key="TextFontSizeConvertor"/>
+            <convertors:FormTypeConvertor x:Key="FormTypeConvertor"/>
+            <convertors:EventHomeConvertor  x:Key="EventHomeConvertor"/>
+            <convertors:EventTimeLineConvertor x:Key="EventTimeLineConvertor"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

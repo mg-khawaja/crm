@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+               xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+              xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+                                         xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+
+    mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.Views.PopupView.CalendarPopupView">
+    <StackLayout Padding="20">
+
+        <!--TodaySelectionTextColor="White"
+		                                TodaySelectionBackgroundColor="{StaticResource DarkThemeColor}"-->
+
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="5">
+            <customcontrols:CustomCardView CornerRadius="20" IsClippedToBounds="True" Padding="0" BackgroundColor="{StaticResource DarkThemeColor}">
+                <!--<StackLayout Spacing="0" BackgroundColor="{StaticResource DarkThemeColor}" Margin="0,0,0,10">-->
+                <syncfusion:SfCalendar x:Name="calendar" SelectedDate="{Binding SelectedDate}" MoveToDate="{Binding MoveTODate}" 
+                                           TapCommand="{Binding DateSelectedCommand}" 
+                                      >
+                        <syncfusion:SfCalendar.MonthViewSettings>
+                            <syncfusion:MonthViewSettings 
+		                                CurrentMonthBackgroundColor="{StaticResource DarkThemeColor}"
+		                                CurrentMonthTextColor="White"
+		                                PreviousMonthBackgroundColor="{StaticResource ThemeColor}"
+		                                PreviousMonthTextColor="White"
+                                       TodaySelectionBackgroundColor ="White"
+		                                TodaySelectionTextColor="{StaticResource DarkThemeColor}"
+                                        TodayBorderColor="Transparent"
+                                        TodayTextColor="White"                    
+                                        DateSelectionColor="White"
+		                                SelectedDayTextColor="{StaticResource DarkThemeColor}"
+                                        DayHeaderFormat="EEEEE"
+		                                DayFontSize="12"
+		                                DayHeaderFontSize="14"
+		                                DayHeaderBackgroundColor="{StaticResource DarkThemeColor}"
+		                                SelectionRadius="15"
+                                        HeaderTextColor="White"
+                                        DayHeaderTextColor="White"
+                                        HeaderBackgroundColor="{StaticResource DarkThemeColor}"
+		                                HeaderFontSize="15">
+
+                            </syncfusion:MonthViewSettings>
+                        </syncfusion:SfCalendar.MonthViewSettings>
+                        <syncfusion:SfCalendar.YearViewSettings>
+                            <syncfusion:YearViewSettings 
+			                           LayoutBackground="{StaticResource DarkThemeColor}"
+			                           DateTextColor="Pink"
+			                           HeaderBackground="{StaticResource DarkThemeColor}"
+			                           YearHeaderTextColor="White"
+                            MonthHeaderTextColor="White"
+                            MonthHeaderBackground="{StaticResource DarkThemeColor}"
+                            MonthLayoutBackground="{StaticResource DarkThemeColor}"/>
+                        </syncfusion:SfCalendar.YearViewSettings>
+                    </syncfusion:SfCalendar>
+
+                    <!--<BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5"></BoxView>-->
+                    <!--<customcontrols:CustomButton Text="{translator:Translate Save}" BackgroundColor="Transparent"
+                                         TextColor="White" FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="20"
+                                                 Command="{Binding DateSelectedCommand}" ></customcontrols:CustomButton>-->
+                <!--</StackLayout>-->
+                
+
+            </customcontrols:CustomCardView>
+           
+        </StackLayout>
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+        </StackLayout.GestureRecognizers>
+    </StackLayout>
+</pages:PopupPage>

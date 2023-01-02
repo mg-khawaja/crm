@@ -1,0 +1,782 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:datatemplateselectors="clr-namespace:CrmStepMobileApp.DataTemplateSelectors"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews"
+             mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.Views.HomePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="EngEventDataTemplate">
+                <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding title}"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <customcontrols:CustomSwitch IsToggled="{Binding is_completed}" SwitchThumbColor="{StaticResource DarkThemeColor}"
+                                                            SwitchOnColor="{StaticResource ThemeColor}" SwitchOffColor="Gray"
+                                                            HorizontalOptions="EndAndExpand" Toggled="Switch_Toggled"></customcontrols:CustomSwitch>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <customcontrols:CustomImage Source="calendar.png" Aspect="AspectFit"
+                                                                            HeightRequest="25" WidthRequest="25"
+                                                                            TintColor="{StaticResource ThemeColor}"/>
+                        <Label Text="{Binding start_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                        <Label Text="{Binding end_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <customcontrols:CustomImage Source="pin.png" Aspect="AspectFit"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}"/>
+                        <Label Text="{Binding .,Converter={StaticResource EventHomeConvertor}}" 
+                                TextColor="{StaticResource DarkThemeColor}" FontSize="15"
+                               FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+
+                    
+                    </StackLayout>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Events_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrEventDataTemplate">
+                <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <customcontrols:CustomSwitch IsToggled="{Binding is_completed}" SwitchThumbColor="{StaticResource DarkThemeColor}"
+                                SwitchOnColor="{StaticResource ThemeColor}" SwitchOffColor="Gray"
+                                Toggled="Switch_Toggled"></customcontrols:CustomSwitch>
+                        <Label Text="{Binding title}" TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                FontFamily="{StaticResource Montserrat_Bold_Key}" HorizontalOptions="EndAndExpand"></Label>
+                    </StackLayout>
+
+
+                 
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <Label Text="{Binding start_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}"  HorizontalOptions="EndAndExpand" ></Label>
+                        <Label Text="{Binding end_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}"  HorizontalOptions="EndAndExpand" ></Label>
+                        <customcontrols:CustomImage Source="calendar.png" Aspect="AspectFit"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}" HorizontalOptions="End"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <Label  Text="{Binding .,Converter={StaticResource EventHomeConvertor}}"  TextColor="{StaticResource DarkThemeColor}" FontSize="15"
+                               FontFamily="{StaticResource Montserrat_Regular_Key}" HorizontalOptions="EndAndExpand" />
+                        <customcontrols:CustomImage Source="pin.png" Aspect="AspectFit" HorizontalOptions="End"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}"/>
+                    </StackLayout>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Events_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="EngIncompleteEventsDataTempalte">
+                <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding title}"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <customcontrols:CustomSwitch IsToggled="{Binding is_completed}" SwitchThumbColor="{StaticResource DarkThemeColor}"
+                                                            SwitchOnColor="{StaticResource ThemeColor}" SwitchOffColor="Gray"
+                                                            HorizontalOptions="EndAndExpand" Toggled="Switch_Toggled2"></customcontrols:CustomSwitch>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <customcontrols:CustomImage Source="calendar.png" Aspect="AspectFit"
+                                                                            HeightRequest="25" WidthRequest="25"
+                                                                            TintColor="{StaticResource ThemeColor}"/>
+                        <Label Text="{Binding start_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                        <Label Text="{Binding end_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <customcontrols:CustomImage Source="pin.png" Aspect="AspectFit"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}"/>
+                        <Label  Text="{Binding .,Converter={StaticResource EventHomeConvertor}}" 
+                                TextColor="{StaticResource DarkThemeColor}" FontSize="15"
+                               FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+
+
+                    </StackLayout>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Events_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrIncompleteEventsDataTempalte">
+                <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <customcontrols:CustomSwitch IsToggled="{Binding is_completed}" SwitchThumbColor="{StaticResource DarkThemeColor}"
+                                SwitchOnColor="{StaticResource ThemeColor}" SwitchOffColor="Gray"
+                                Toggled="Switch_Toggled2"></customcontrols:CustomSwitch>
+                        <Label Text="{Binding title}" TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                FontFamily="{StaticResource Montserrat_Bold_Key}" HorizontalOptions="EndAndExpand"></Label>
+                    </StackLayout>
+
+
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <Label Text="{Binding start_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}"  HorizontalOptions="EndAndExpand" ></Label>
+                        <Label Text="{Binding end_time,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}"  HorizontalOptions="EndAndExpand" ></Label>
+                        <customcontrols:CustomImage Source="calendar.png" Aspect="AspectFit"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}" HorizontalOptions="End"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <Label  Text="{Binding .,Converter={StaticResource EventHomeConvertor}}"   TextColor="{StaticResource DarkThemeColor}" FontSize="15"
+                               FontFamily="{StaticResource Montserrat_Regular_Key}" HorizontalOptions="EndAndExpand" />
+                        <customcontrols:CustomImage Source="pin.png" Aspect="AspectFit" HorizontalOptions="End"
+                                                    HeightRequest="15" WidthRequest="15"
+                                                    TintColor="{StaticResource ThemeColor}"/>
+                    </StackLayout>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Events_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="EngHotSalesDataTemplate">
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <forms:CachedImage Source="{Binding img}" Aspect="AspectFit"
+                                                                   LoadingPlaceholder="placeholder.png" ErrorPlaceholder="placeholder.png"
+                                                                   HeightRequest="60" WidthRequest="60" >
+
+                    </forms:CachedImage>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding name}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label HorizontalOptions="StartAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding category}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text="-" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding supplier}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <Label Text="{Binding consumer_price,StringFormat='{0} ₪'}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HotSales_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrHotSalesDataTemplate">
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <Label Text="{Binding consumer_price,StringFormat='₪ {0}'}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+                    
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding name}" HorizontalOptions="EndAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label HorizontalOptions="EndAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding category}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text="-" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding supplier}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                 
+                    <forms:CachedImage Source="{Binding img}" Aspect="AspectFit"
+                                       LoadingPlaceholder="placeholder.png" ErrorPlaceholder="placeholder.png"
+                                       HeightRequest="60" WidthRequest="60" >
+
+                    </forms:CachedImage>
+
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HotSales_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="EngBirthdaysDataTemplate">
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                        <forms:CachedImage Source="{Binding photo}" Aspect="AspectFit" 
+                                                                   LoadingPlaceholder="deals.png" ErrorPlaceholder="deals.png"
+                                                                   HeightRequest="40" WidthRequest="40" >
+                            <forms:CachedImage.Transformations>
+                                <transformations:CircleTransformation/>
+                            </forms:CachedImage.Transformations>
+                        </forms:CachedImage>
+                        <!--<Label Text="{Binding first_name}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>-->
+                    <Label  HorizontalOptions="StartAndExpand" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding first_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                <Span Text="  "
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                <Span Text="{Binding last_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <StackLayout HorizontalOptions="End" Spacing="0">
+                            <Label Text="{Binding days_to_go}"
+                                                           HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14" HorizontalTextAlignment="End"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                            <Label Text="{Binding days_to_go_str}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="10"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                        </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Birthdays_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrBirthdaysDataTemplate">
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <StackLayout HorizontalOptions="End" Spacing="0">
+                        <Label Text="{Binding days_to_go}"
+                                                           HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14" HorizontalTextAlignment="End"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                        <Label Text="{Binding days_to_go_str}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="10"
+                                                         FontFamily="{StaticResource Montserrat_Regular_Key}" ></Label>
+                    </StackLayout>
+                    <Label  HorizontalOptions="EndAndExpand" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding last_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                <Span Text="  "
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                <Span Text="{Binding first_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <forms:CachedImage Source="{Binding photo}" Aspect="AspectFit" 
+                                                                   LoadingPlaceholder="deals.png" ErrorPlaceholder="deals.png"
+                                                                   HeightRequest="40" WidthRequest="40" >
+                        <forms:CachedImage.Transformations>
+                            <transformations:CircleTransformation/>
+                        </forms:CachedImage.Transformations>
+                    </forms:CachedImage>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Birthdays_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="EngDealsDataTemplate">
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <customcontrols:CustomImage Source="deals" Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                   HeightRequest="40" WidthRequest="40" >
+
+                    </customcontrols:CustomImage>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding name}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label HorizontalOptions="StartAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding status}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text="-" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding contact}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text=" " TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding company}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <Label Text="{Binding amount,StringFormat='{0} ₪'}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Deal_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrDealsDataTemplate">
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <Label Text="{Binding amount,StringFormat='₪ {0}'}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+
+                  
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding name}" HorizontalOptions="EndAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label HorizontalOptions="EndAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding status}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text="-" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding contact}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                    <Span Text=" " TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="12"></Span>
+                                    <Span Text="{Binding company}" TextColor="{StaticResource ThemeColor}"
+                                                                      FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <customcontrols:CustomImage Source="deals" Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                   HeightRequest="40" WidthRequest="40" >
+
+                    </customcontrols:CustomImage>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Deal_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="EngLeadsDataTemplate">
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <customcontrols:CustomImage Source="leads" Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                   HeightRequest="40" WidthRequest="40" >
+
+                    </customcontrols:CustomImage>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label  HorizontalOptions="StartAndExpand" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding first_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                    <Span Text="  "
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                    <Span Text="{Binding last_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Text="{Binding mail}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label Text="{Binding mobile}" HorizontalOptions="StartAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+
+                    </StackLayout>
+                    <Label Text="{Binding status}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Leads_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HrLeadsDataTemplate">
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                    <Label Text="{Binding status}" HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="14"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" ></Label>
+
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label  HorizontalOptions="EndAndExpand" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding last_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                    <Span Text="  "
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                    <Span Text="{Binding first_name}"
+                                          TextColor="{StaticResource DarkThemeColor}" FontSize="16"
+                                          FontFamily="{StaticResource Montserrat_Medium_Key}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Text="{Binding mail}" HorizontalOptions="EndAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+                        <Label Text="{Binding mobile}" HorizontalOptions="EndAndExpand"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="12"
+                                                         FontFamily="{StaticResource Montserrat_Medium_Key}" ></Label>
+
+                    </StackLayout>
+                    <customcontrols:CustomImage Source="leads" Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                   HeightRequest="40" WidthRequest="40" >
+
+                    </customcontrols:CustomImage>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Leads_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+
+
+
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="EventsDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EngEventDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HrEventDataTemplate}"/>
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="IncompleteEventsDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EngIncompleteEventsDataTempalte}"
+                                                                HebrewTemplate="{StaticResource HrIncompleteEventsDataTempalte}"/>
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="HotSalesDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EngHotSalesDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HrHotSalesDataTemplate}"/>
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="BirthdaysDataTemplateSelector"
+                                                                 EnglishTemplate="{StaticResource EngBirthdaysDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HrBirthdaysDataTemplate}"/>
+            
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="LeadsDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EngLeadsDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HrLeadsDataTemplate}"/>
+            <datatemplateselectors:HomePageDataTemplateSelector x:Key="DealsDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EngDealsDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HrDealsDataTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" HeightRequest="15" WidthRequest="15" TintColor="{StaticResource DarkThemeColor}">
+                    <customcontrols:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                    </customcontrols:CustomImage.GestureRecognizers>
+                </customcontrols:CustomImage>
+                <Label   Grid.Column="1" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="15" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                <!--<Image Grid.Column="2"  Source="profile.png" Aspect="AspectFit"
+                       Margin="13">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ProfileCommand}"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>-->
+
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="{StaticResource MediumGrayColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <ScrollView>
+                    <StackLayout>
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="event.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" />
+                                    <Label Text="{Binding TodayEvents}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+
+                                   
+                                    <Label Text="{Binding TodayEvents}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="event.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" 
+                                                                HorizontalOptions="End"/>
+                                </StackLayout>
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding EventsList}" IsClippedToBounds="True"
+                                            BindableLayout.ItemTemplateSelector="{StaticResource EventsDataTemplateSelector}"/>
+
+
+
+                                <Button Text="{Binding ShowAll}" TextColor="{StaticResource ThemeColor}" BackgroundColor="Transparent"
+                                        HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                        Command="{Binding ShowAllEventsCommand}"></Button>
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="wrong.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" />
+                                    <Label Text="{Binding IncompleteEvents}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding IncompleteEvents}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="wrong.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" 
+                                                                HorizontalOptions="End"/>
+                                </StackLayout>
+
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding IncompleteEventsList}" IsClippedToBounds="True"
+                                             BindableLayout.ItemTemplateSelector="{StaticResource IncompleteEventsDataTemplateSelector}"/>
+
+
+                                <!--<Button Text="{Binding ShowAll}" TextColor="{StaticResource ThemeColor}" BackgroundColor="Transparent"
+                                        HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                        Command="{Binding ShowAllEventsCommand}"></Button>-->
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+                              
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="hotProduct.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35"/>
+                                    <Label Text="{Binding HotSaleProducts}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+
+
+                                    <Label Text="{Binding HotSaleProducts}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="hotProduct.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" 
+                                                                 HorizontalOptions="End"/>
+                                </StackLayout>
+
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding HotSalesList}" IsClippedToBounds="True"
+                                            BindableLayout.ItemTemplateSelector="{StaticResource HotSalesDataTemplateSelector}"/>
+
+
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="birthday.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" />
+                                    <Label Text="{Binding CustomerBirthday}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+
+
+                                    <Label Text="{Binding CustomerBirthday}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="birthday.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" 
+                                                                HorizontalOptions="End"/>
+                                </StackLayout>
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding BirthdaysList}" IsClippedToBounds="True" 
+                                             BindableLayout.ItemTemplateSelector="{StaticResource BirthdaysDataTemplateSelector}"/>
+
+
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="dealsHome.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" />
+                                    <Label Text="{Binding RecentDeals}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+
+
+                                    <Label Text="{Binding RecentDeals}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="dealsHome.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="25" WidthRequest="25" 
+                                                                HorizontalOptions="End"/>
+                                </StackLayout>
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding DealsList}" IsClippedToBounds="True"
+                                             BindableLayout.ItemTemplateSelector="{StaticResource DealsDataTemplateSelector}"/>
+
+
+                                <!--<Button Text="{Binding ShowAll}" TextColor="{StaticResource ThemeColor}" BackgroundColor="Transparent"
+                                        HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                        Command="{Binding ShowAllDealsCommand}"></Button>-->
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+                        <customcontrols:CustomCardView CornerRadius="10" BackgroundColor="White" IsClippedToBounds="True"
+                                                   Padding="0" Margin="20">
+                            <StackLayout Margin="20,10">
+                              
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding EnglishTitle}">
+
+                                    <customcontrols:CustomImage Source="smallLead.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" />
+                                    <Label Text="{Binding RecentLeads}" 
+                                           TextColor="{StaticResource ThemeColor}"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"  IsVisible="{Binding HebrewTitle}" HorizontalOptions="FillAndExpand">
+
+
+                                    <Label Text="{Binding RecentLeads}" 
+                                           TextColor="{StaticResource ThemeColor}" HorizontalOptions="EndAndExpand"
+                                           FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                                    <customcontrols:CustomImage Source="smallLead.png" 
+                                                                Aspect="AspectFit" TintColor="{StaticResource ThemeColor}"
+                                                                HeightRequest="35" WidthRequest="35" 
+                                                                 HorizontalOptions="End"/>
+                                </StackLayout>
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding LeadsList}" IsClippedToBounds="True"
+                                             BindableLayout.ItemTemplateSelector="{StaticResource LeadsDataTemplateSelector}">
+
+                                </StackLayout>
+                                <!--<Button Text="{Binding ShowAll}" TextColor="{StaticResource ThemeColor}" BackgroundColor="Transparent"
+                                        HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                        Command="{Binding ShowAllLeadsCommand}"></Button>-->
+                            </StackLayout>
+
+                        </customcontrols:CustomCardView>
+
+
+                    </StackLayout>
+                </ScrollView>
+                <commonviews:BottomLayoutView Grid.Row="1" HeightRequest="50"></commonviews:BottomLayoutView>
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

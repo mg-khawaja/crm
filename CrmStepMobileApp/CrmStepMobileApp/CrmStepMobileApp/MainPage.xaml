@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.MainPage"
+             BackgroundColor="{StaticResource WhiteColor}">
+
+    <StackLayout Padding="20">
+        <!-- Place new controls here -->
+
+        <customcontrols:CustomCardView CornerRadius="20" IsClippedToBounds="True" Padding="0" HasShadow="False">
+            <syncfusion:SfCalendar x:Name="calendar" SelectedDate="{Binding SelectedDate}">
+                <syncfusion:SfCalendar.MonthViewSettings>
+                    <syncfusion:MonthViewSettings 
+		                                CurrentMonthBackgroundColor="{StaticResource DarkThemeColor}"
+		                                CurrentMonthTextColor="White"
+		                                PreviousMonthBackgroundColor="{StaticResource ThemeColor}"
+		                                PreviousMonthTextColor="White"
+                                        TodaySelectionTextColor="White"
+		                                TodaySelectionBackgroundColor="{StaticResource DarkThemeColor}"
+                                        TodayBorderColor="Transparent"
+                                        TodayTextColor="White"                    
+                                        DateSelectionColor="White"
+		                                SelectedDayTextColor="{StaticResource DarkThemeColor}"
+                                        
+                                        DayHeaderFormat="EEEEE"
+		                                DayFontSize="12"
+		                                DayHeaderFontSize="14"
+		                                DayHeaderBackgroundColor="{StaticResource DarkThemeColor}"
+		                                SelectionRadius="15"
+		                               
+                                        HeaderTextColor="White"
+                                        DayHeaderTextColor="White"
+                                        HeaderBackgroundColor="{StaticResource DarkThemeColor}"
+		                                HeaderFontSize="15">
+
+                    </syncfusion:MonthViewSettings>
+                </syncfusion:SfCalendar.MonthViewSettings>
+            </syncfusion:SfCalendar>
+
+        </customcontrols:CustomCardView>
+    </StackLayout>
+
+</ContentPage>

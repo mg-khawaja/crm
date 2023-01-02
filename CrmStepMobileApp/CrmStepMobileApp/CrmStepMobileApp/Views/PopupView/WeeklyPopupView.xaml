@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+    mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.Views.PopupView.WeeklyPopupView">
+        <StackLayout Padding="20">
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="5">
+                <ScrollView BackgroundColor="White">
+                    <StackLayout Margin="20">
+                        <Label Text="Repeat Every" TextColor="{StaticResource DarkThemeColor}"
+                   FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="20"/>
+                        <customcontrols:CustomEntry Text="{Binding RepeatEveryCount}" TextColor="{StaticResource ThemeColor}"
+                                        TextFontFamily="{StaticResource Montserrat_Regular_Key}" TextFontSize="14" InputType="Numeric"/>
+
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding DaysList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout HeightRequest="30" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                    <Label Text="{Binding Day}" TextColor="{StaticResource ThemeColor}"
+                                           FontSize="16" FontFamily="{StaticResource Montserrat_Medium_Key}"/>
+
+                                    <CheckBox IsChecked="{Binding IsChecked}" Color="{StaticResource ThemeColor}"
+                                              VerticalOptions="CenterAndExpand" 
+                                                HorizontalOptions="EndAndExpand"></CheckBox>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+
+
+
+
+
+
+                    <Label Text="End" TextColor="{StaticResource DarkThemeColor}"
+                   FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="20"/>
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="{Binding EndText}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               FontSize="20" TextColor="{StaticResource ThemeColor}" 
+                               IsEnabled="False"/>
+                        <customcontrols:CustomImage Source="back.png" Aspect="AspectFit" 
+                                                        HorizontalOptions="EndAndExpand" Rotation="180"
+                                                         TintColor="{StaticResource DarkThemeColor}"
+                                                        HeightRequest="15" WidthRequest="15"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EndCommand}"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+
+                    <customcontrols:CustomEntry Text="{Binding EndCount}" TextColor="{StaticResource ThemeColor}" IsVisible="{Binding EndCountVisibility}"
+                                        TextFontFamily="{StaticResource Montserrat_Regular_Key}" TextFontSize="16" InputType="Numeric"/>
+
+                    <StackLayout Orientation="Horizontal"  IsVisible="{Binding UntilDatePickerVisibility}">
+                        <DatePicker x:Name="UntileDatePicker" IsVisible="False"></DatePicker>
+                        <Label Text="{Binding UntileDate,Converter={StaticResource ToViewDateTimeConvertor}}" 
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" 
+                               FontSize="16" TextColor="{StaticResource ThemeColor}" VerticalOptions="EndAndExpand"
+                                IsEnabled="False" IsVisible="{Binding UntilDatePickerVisibility}"/>
+                        <customcontrols:CustomImage Source="back.png" Aspect="AspectFit" 
+                                                        HorizontalOptions="EndAndExpand" Rotation="180"
+                                                   TintColor="{StaticResource DarkThemeColor}"
+                                                        HeightRequest="15" WidthRequest="15" IsVisible="{Binding UntilDatePickerVisibility}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="UntilDatePicker_Tapped"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+
+                    <Button Text="Save" BackgroundColor="{StaticResource ThemeColor}" HeightRequest="50" CornerRadius="10"
+                            Command="{Binding SaveCommand}" TextColor="White" Margin="0,15,0,0"></Button>
+
+                </StackLayout>
+
+                </ScrollView>
+
+            </StackLayout>
+        </StackLayout>
+
+</pages:PopupPage>

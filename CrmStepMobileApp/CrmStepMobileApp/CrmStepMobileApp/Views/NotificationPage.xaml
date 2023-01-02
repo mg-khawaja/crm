@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews"
+             xmlns:datatemplateselectors="clr-namespace:CrmStepMobileApp.DataTemplateSelectors"
+             mc:Ignorable="d"
+                          xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+
+             x:Class="CrmStepMobileApp.Views.NotificationPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="EnglishDataTemplate">
+                    <customcontrols:CustomCardView  Elevation="2" Padding="0" Margin="10" CornerRadius="10">
+                        <StackLayout Spacing="0">
+                            <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                <customcontrols:CustomImage Source="{Binding Action,Converter={StaticResource EventTimeLineConvertor}}" 
+                                                            TintColor="{StaticResource DarkThemeColor}" 
+                                                            VerticalOptions="CenterAndExpand"  Margin="2"
+                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="{Binding ActionText}" 
+                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                       FontFamily="{StaticResource Montserrat_Bold_Key}" 
+                                       VerticalTextAlignment="Center"></Label>
+
+                            <customcontrols:CustomSwitch  IsToggled="{Binding IsCompleted}" SwitchThumbColor="{StaticResource DarkThemeColor}" 
+                                                          SwitchOnColor="{StaticResource ThemeColor}" SwitchOffColor="Gray"
+                                         HorizontalOptions="EndAndExpand"
+                                         VerticalOptions="CenterAndExpand" Margin="0,10,0,0"
+                                         Toggled="Switch_Toggled" />
+                            </StackLayout>
+
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                     HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            <Label Text="{translator:Translate Subject}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Subject}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            <Label Text="{translator:Translate Description}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Description}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                        <Label Text="{translator:Translate AssignTo}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                        <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding AssignTo}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                        </StackLayout>
+                        <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+
+
+                        <Label Text="{translator:Translate AssignedFor}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                        <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding ParentType,Converter={StaticResource FormTypeConvertor}}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                        </StackLayout>
+                        <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                        <Label Text="{translator:Translate StartsOn}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding ConvertedStartTime,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                       TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+                            <Label Text="{translator:Translate EndsOn}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding ConvertedEndTime,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                       TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+                           
+                        </StackLayout>
+
+                    <customcontrols:CustomCardView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </customcontrols:CustomCardView.GestureRecognizers>
+                    </customcontrols:CustomCardView>
+
+            </DataTemplate>
+            <DataTemplate x:Key="HebrewDataTemplate">
+            
+                    <customcontrols:CustomCardView  Elevation="2" Padding="0" Margin="10" CornerRadius="10">
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35"  HorizontalOptions="FillAndExpand">
+                            <customcontrols:CustomSwitch  IsToggled="{Binding IsCompleted}" HorizontalOptions="StartAndExpand"
+                                         VerticalOptions="CenterAndExpand" Margin="0,10,0,0"
+                                         Toggled="Switch_Toggled" SwitchOffColor="Gray"
+                                         SwitchThumbColor="{StaticResource DarkThemeColor}" SwitchOnColor="{StaticResource ThemeColor}" />
+
+                            <Label Text="{Binding ActionText}"  HorizontalOptions="End"
+                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                       FontFamily="{StaticResource Montserrat_Bold_Key}" 
+                                       VerticalTextAlignment="Center"></Label>
+
+                            <customcontrols:CustomImage Source="{Binding Action,Converter={StaticResource EventTimeLineConvertor}}" 
+                                                            TintColor="{StaticResource DarkThemeColor}"  HorizontalOptions="End"
+                                                            VerticalOptions="CenterAndExpand"  Margin="2"
+                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+
+
+                            </StackLayout>
+
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                     HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            <Label Text="{translator:Translate Subject}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                                <Label Text="{Binding Subject}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            <Label Text="{translator:Translate Description}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                                <Label Text="{Binding Description}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+
+                        <Label Text="{translator:Translate AssignTo}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                        <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                            <Label Text="{Binding AssignTo}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                        </StackLayout>
+                        <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+
+                        <Label Text="{translator:Translate AssignedFor}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                        <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                            <Label Text="{Binding ParentTpe,Converter={StaticResource FormTypeConvertor}}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                        </StackLayout>
+                        <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+
+
+                        <Label Text="{translator:Translate StartsOn}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                            <Label Text="{Binding ConvertedStartTime,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                       TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+                            <Label Text="{translator:Translate EndsOn}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                            <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="End">
+                            <Label Text="{Binding ConvertedEndTime,Converter={StaticResource ToViewDateTimeConvertor},ConverterParameter='EventsPage'}" 
+                                       TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                            </StackLayout>
+                            <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+           
+
+                        </StackLayout>
+                    <customcontrols:CustomCardView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </customcontrols:CustomCardView.GestureRecognizers>
+                </customcontrols:CustomCardView>
+
+           
+            </DataTemplate>
+            <datatemplateselectors:EventTimeLineDataTemplateSelector x:Key="EventTimeLineDataTemplateSelector"
+                                                                     EnglishDataTemplate="{StaticResource EnglishDataTemplate}"
+                                                                     HebrewDataTemplate="{StaticResource HebrewDataTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" TintColor="{StaticResource DarkThemeColor}" HeightRequest="15" WidthRequest="15">
+                <customcontrols:CustomImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                </customcontrols:CustomImage.GestureRecognizers>
+            </customcontrols:CustomImage>
+            <Label   Grid.Column="2" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="15" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+
+        </Grid>
+        <Grid Grid.Row="1"  RowSpacing="0" BackgroundColor="{StaticResource MediumGrayColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <ScrollView x:Name="MainScroll">
+                <StackLayout>
+                    <StackLayout BindableLayout.ItemsSource="{Binding NotificationsList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <customcontrols:CustomCardView BackgroundColor="White" CornerRadius="10"
+                                                           Margin="10">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding title}" TextColor="{StaticResource ThemeColor}"
+                                           FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="20"/>
+                                            <Label Text="{Binding date,Converter={StaticResource ToViewDateTimeConvertor}}"  TextColor="{StaticResource DarkThemeColor}"
+                                           HorizontalOptions="EndAndExpand"
+                                           FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Label>
+                                        </StackLayout>
+                                        <Label Text="{Binding msg}" TextColor="{StaticResource ThemeColor}"
+                                           FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="14"/>
+                                    </StackLayout>
+                                    <customcontrols:CustomCardView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                    </customcontrols:CustomCardView.GestureRecognizers>
+                                </customcontrols:CustomCardView>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    <StackLayout BindableLayout.ItemsSource="{Binding NotificationsEventsList}"
+                                 BindableLayout.ItemTemplateSelector="{StaticResource EventTimeLineDataTemplateSelector}">
+                        <!--<BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <customcontrols:CustomCardView BackgroundColor="White" CornerRadius="10"
+                                                           Margin="20,10">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding ActionText}" TextColor="{StaticResource ThemeColor}"
+                                           FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="20"/>
+                                            <Label Text="{Binding ConvertedStartTime,Converter={StaticResource ToViewDateTimeConvertor}}"  TextColor="{StaticResource DarkThemeColor}"
+                                           HorizontalOptions="EndAndExpand"
+                                           FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="12"></Label>
+                                        </StackLayout>
+                                        <Label Text="{Binding Subject}" TextColor="{StaticResource ThemeColor}"
+                                           FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="14"/>
+                                        <Label Text="{Binding Description}" TextColor="{StaticResource ThemeColor}"
+                                           FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="14"/>
+                                    </StackLayout>
+                                </customcontrols:CustomCardView>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>-->
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <commonviews:BottomLayoutView Grid.Row="1" HeightRequest="50"></commonviews:BottomLayoutView>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

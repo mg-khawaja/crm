@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+            xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             x:Class="CrmStepMobileApp.Views.LoginPage"
+             BackgroundColor="{StaticResource WhiteColor}">
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Grid HeightRequest="300">
+                <Image Source="loginBack.png" Aspect="AspectFill"
+                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
+                <Image Source="logo.png" Aspect="AspectFit" Margin="20" HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"></Image>
+            </Grid>
+            <!--<Image Source="logo.png" Aspect="AspectFit"
+                   HeightRequest="250" Margin="0,0,10,0"></Image>-->
+            <StackLayout Margin="20,10" Grid.Row="1" Spacing="0">
+                <customcontrols:CustomLabel Text="{translator:Translate Username}" TextColor="{StaticResource DarkThemeColor}"
+                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="End"></customcontrols:CustomLabel>
+                <customcontrols:CustomEntry Text="{Binding Username}" TextColor="{StaticResource ThemeColor}" 
+                                        TextFontSize="17" UnderlineColor="{StaticResource ThemeColor}"
+                                        TextFontFamily="{StaticResource Montserrat_Medium_Key}"/>
+
+                <customcontrols:CustomLabel Text="{translator:Translate Password}" TextColor="{StaticResource DarkThemeColor}"
+                   FontFamily="{StaticResource Montserrat_Bold_Key}" Margin="0,30,0,0"  VerticalTextAlignment="End"
+                                            ></customcontrols:CustomLabel>
+                <customcontrols:CustomEntry Text="{Binding Password}" TextColor="{StaticResource ThemeColor}" 
+                                        TextFontSize="17" UnderlineColor="{StaticResource ThemeColor}" InputType="Password"
+                                        TextFontFamily="{StaticResource Montserrat_Medium_Key}"/>
+
+
+                <customcontrols:CustomButton Text="Login" Margin="30,80,30,20" Elevation="2"
+                                         HeightRequest="60" CornerRadius="5" 
+                                         FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                         Command="{Binding LoginCommand}" BackgroundColor="{StaticResource DarkThemeColor}"/>
+            </StackLayout>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

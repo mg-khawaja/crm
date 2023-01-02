@@ -1,0 +1,1276 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             mc:Ignorable="d"
+             xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:crmstepmobileapp="clr-namespace:CrmStepMobileApp"
+                     xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="CrmStepMobileApp.Views.ListPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="LeadsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                    <customcontrols:CustomImage Source="lead.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    <Label Text="{Binding FirstName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding LastName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="EndAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" Rotation="180"
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" />
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>-->
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="HeLeadsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                  
+                                  
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="StartAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" 
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                    <Label Text="{Binding LastName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding FirstName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="lead.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalTextAlignment="End"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                 
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                  
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                    <!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>-->
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="ContactsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+
+                                    <Grid VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="30" Padding="0,5,0,0">
+                                        <forms:CachedImage Source="{Binding Photo}" Aspect="AspectFill"
+                                                      
+                                                        HeightRequest="30" WidthRequest="30">
+                                            <forms:CachedImage.Transformations>
+                                                <ffTransformations:CircleTransformation/>
+                                            </forms:CachedImage.Transformations> 
+                                        </forms:CachedImage>
+
+                                        <customcontrols:CustomImage Source="contactNew" TintColor="{StaticResource DarkThemeColor}" 
+                                                                    VerticalOptions="CenterAndExpand" 
+                                                                    IsVisible="{Binding Photo,Converter={StaticResource ListIconConvertor}}"
+                                                                    Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    </Grid>
+                                    
+
+
+
+
+                                    <Label Text="{Binding FirstName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding LastName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="EndAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" Rotation="180"
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" />
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <!--<Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    --><!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>--><!--
+                                </StackLayout>-->
+                                <!--<BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>-->
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="HeContactsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                          
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                  
+                                
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="StartAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" 
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+
+                                    <Label Text="{Binding LastName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20" HorizontalOptions="End"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="{Binding FirstName}"  HorizontalOptions="End"
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <Grid VerticalOptions="CenterAndExpand"  HorizontalOptions="End" HeightRequest="30" WidthRequest="30" Padding="0,5,0,0">
+                                        <forms:CachedImage Source="{Binding Photo}" Aspect="AspectFill"
+                                                      
+                                                        HeightRequest="30" WidthRequest="30">
+                                            <forms:CachedImage.Transformations>
+                                                <ffTransformations:CircleTransformation/>
+                                            </forms:CachedImage.Transformations>
+                                        </forms:CachedImage>
+
+                                        <customcontrols:CustomImage Source="contactNew" TintColor="{StaticResource DarkThemeColor}" 
+                                                                    VerticalOptions="CenterAndExpand" 
+                                                                    IsVisible="{Binding Photo,Converter={StaticResource ListIconConvertor}}"
+                                                                    Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    </Grid>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <!--<Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    -->
+                                <!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>-->
+                                <!--
+                                </StackLayout>-->
+                                <!--<BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>-->
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CompanyDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                    <!--<forms:CachedImage Source="{Binding Logo}" Aspect="AspectFit"
+                                                       VerticalOptions="CenterAndExpand" 
+                                                        HeightRequest="30" WidthRequest="30"/>-->
+
+                                    <Grid    VerticalOptions="CenterAndExpand"  HeightRequest="30" WidthRequest="30" Padding="0,5,0,0">
+                                        <forms:CachedImage Source="{Binding Logo}" Aspect="AspectFill"
+                                                       VerticalOptions="CenterAndExpand" 
+                                                        HeightRequest="30" WidthRequest="30">
+                                            <forms:CachedImage.Transformations>
+                                                <ffTransformations:CircleTransformation/>
+                                            </forms:CachedImage.Transformations> 
+                                        </forms:CachedImage>
+
+                                        <customcontrols:CustomImage Source="companyNew" TintColor="{StaticResource DarkThemeColor}" 
+                                                                    VerticalOptions="CenterAndExpand" 
+                                                                    IsVisible="{Binding Logo,Converter={StaticResource ListIconConvertor}}"
+                                                                    Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    </Grid>
+
+
+                                    <Label Text="{Binding CompanyName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="EndAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" Rotation="180"
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" />
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="HeCompanyDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                         
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="StartAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" 
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+
+
+
+                                    <Label Text="{Binding CompanyName}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                              
+
+                                    <Grid    VerticalOptions="CenterAndExpand"  HeightRequest="30" WidthRequest="30" Padding="0,5,0,0">
+                                        <forms:CachedImage Source="{Binding Logo}" Aspect="AspectFill"
+                                                       VerticalOptions="CenterAndExpand" 
+                                                        HeightRequest="30" WidthRequest="30">
+                                            <forms:CachedImage.Transformations>
+                                                <ffTransformations:CircleTransformation/>
+                                            </forms:CachedImage.Transformations>
+                                        </forms:CachedImage>
+
+                                        <customcontrols:CustomImage Source="companyNew" TintColor="{StaticResource DarkThemeColor}" 
+                                                                    VerticalOptions="CenterAndExpand" 
+                                                                    IsVisible="{Binding Logo,Converter={StaticResource ListIconConvertor}}"
+                                                                    Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    </Grid>
+
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Phone}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Phone}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                               
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsPhone_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Mobile}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="phone.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Mobile}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                  
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsMMobile_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate Email}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Email}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                  
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LeadsEmail_Tapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DealsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                               
+                                    <customcontrols:CustomImage Source="dealsNew.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+
+
+                                    <Label Text="{Binding Name}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="EndAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" Rotation="180"
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                               
+                                <Label Text="{translator:Translate Amount}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Amount,Converter={StaticResource StringFormatConvertor}}" 
+                                           TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Contact}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Contact}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate CompanyName}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding CompanyName}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <customcontrols:CustomImage Source="" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                TintColor="{StaticResource DarkThemeColor}"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate DealStage}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding DealStage}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" />
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                               
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="HeDealsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                         
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="StartAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" 
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+
+
+
+                                    <Label Text="{Binding Name}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20" HorizontalOptions="End"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                 
+                                    <customcontrols:CustomImage Source="dealsNew.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand"  HorizontalOptions="End"
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Amount}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                   
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Amount,Converter={StaticResource StringFormatConvertor}}" 
+                                           TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Contact}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                   
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding Contact}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate CompanyName}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                   
+                                    <customcontrols:CustomImage Source="" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                                                                Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                TintColor="{StaticResource DarkThemeColor}"/>
+                                    <Label Text="{Binding CompanyName}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+                                <Label Text="{translator:Translate DealStage}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <customcontrols:CustomImage Source="" 
+                                                                            VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>   
+                                    <Label Text="{Binding DealStage}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                 
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+
+
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TicketsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+                                    <customcontrols:CustomImage Source="supportBlue.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                    <Label Text="{Binding Name}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="EndAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" Rotation="180"
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ID}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ID}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+
+                                <Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="Start" HorizontalOptions="Start"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16"/>
+                                    <!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>-->
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="HeTicketsDataTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding CreatedOn,Converter={StaticResource ToViewDateTimeConvertor}}"  
+                                                   HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
+                                                       TextColor="Gray" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+
+                        </StackLayout>
+                        <customcontrols:CustomCardView  Elevation="2" Padding="0">
+                            <StackLayout Spacing="0">
+                                <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="35">
+
+
+                                    <customcontrols:CustomImage Source="back.png" TintColor="Gray" HorizontalOptions="StartAndExpand"
+                                                                                HeightRequest="15" WidthRequest="15" 
+                                                                                VerticalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                                    <Label Text="{Binding Name}" 
+                                                       TextColor="{StaticResource DarkThemeColor}" FontSize="20"
+                                                   FontFamily="{StaticResource Montserrat_Bold_Key}" VerticalTextAlignment="Center"></Label>
+                                    
+                                    <customcontrols:CustomImage Source="supportBlue.png" TintColor="{StaticResource DarkThemeColor}" 
+                                                                                VerticalOptions="CenterAndExpand" 
+                                                                            Aspect="AspectFit" HeightRequest="30" WidthRequest="30"/>
+                                </StackLayout>
+
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate ID}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding ID}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalTextAlignment="End"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+                                
+                                <Label Text="{translator:Translate ResponsiblePerson}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding ResponsiblePerson}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalTextAlignment="End"/>
+
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                                <Label Text="{translator:Translate Status}"  TextColor="Gray" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                    FontSize="12" Margin="20,10,20,0" HorizontalTextAlignment="End" HorizontalOptions="End"></Label>
+                                <StackLayout Orientation="Horizontal" Margin="20,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Status}" TextColor="{StaticResource ThemeColor}" 
+                                                       FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                       FontSize="16" HorizontalOptions="EndAndExpand"/>
+                                    <!--<customcontrols:CustomImage Source="email.png" 
+                                                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                            Aspect="AspectFit" HeightRequest="20" WidthRequest="20"
+                                                                            TintColor="{StaticResource DarkThemeColor}"/>-->
+                                </StackLayout>
+                                <BoxView VerticalOptions="Start" Color="Gray" Margin="0,10,0,0"
+                                                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            </StackLayout>
+                        </customcontrols:CustomCardView>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <crmstepmobileapp:ListDataTemplateSelector x:Key="ListDataTemplateSelector"
+                                                       LeadDataTemplate="{StaticResource LeadsDataTemplate}"
+                                                       ContactsDataTemplate="{StaticResource ContactsDataTemplate}"
+                                                       CompanyDataTemplate="{StaticResource CompanyDataTemplate}"
+                                                       DealsDataTemplate="{StaticResource DealsDataTemplate}"
+                                                       TicketsDataTemplate="{StaticResource TicketsDataTemplate}"
+                                                       HeLeadDataTemplate="{StaticResource HeLeadsDataTemplate}"
+                                                       HeContactsDataTemplate="{StaticResource HeContactsDataTemplate}"
+                                                       HeCompanyDataTemplate="{StaticResource HeCompanyDataTemplate}"
+                                                       HeDealsDataTemplate="{StaticResource HeDealsDataTemplate}"
+                                                       HeTicketsDataTemplate="{StaticResource HeTicketsDataTemplate}"
+                                                       />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" TintColor="{StaticResource DarkThemeColor}" HeightRequest="15" WidthRequest="15">
+                    <customcontrols:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                    </customcontrols:CustomImage.GestureRecognizers>
+                </customcontrols:CustomImage>
+                <Label   Grid.Column="2" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="12" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                <StackLayout Grid.Column="3" Orientation="Horizontal" Margin="20,0" HorizontalOptions="EndAndExpand">
+                    <customcontrols:CustomImage   Source="add.png" Aspect="AspectFit" HeightRequest="12" WidthRequest="12"
+                                                  TintColor="{StaticResource DarkThemeColor}" VerticalOptions="CenterAndExpand"/>
+                    <Label  Text="{translator:Translate Add}" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                       TextColor="{StaticResource ThemeColor}" HorizontalOptions="Start"
+                       VerticalOptions="CenterAndExpand" FontSize="12"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1"  RowSpacing="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <BoxView Grid.Row="0" VerticalOptions="Start" Color="Gray" 
+                         HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                <StackLayout  Grid.Row="0"  Orientation="Horizontal" Padding="15,0" >
+                    <customcontrols:CustomImage Source="search.png" VerticalOptions="CenterAndExpand" 
+                                                Aspect="AspectFit" HeightRequest="30" WidthRequest="30"
+                                                TintColor="{StaticResource DarkThemeColor}">
+                        <customcontrols:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                        </customcontrols:CustomImage.GestureRecognizers>
+                    </customcontrols:CustomImage>
+                    <customcontrols:CustomEntry Text="{Binding SearchText}" UnderlineColor="{StaticResource DarkThemeColor}" 
+                                                TextColor="{StaticResource ThemeColor}" TextFontFamily="{StaticResource Montserrat_Regular_Key}"
+                                                TextFontSize="15" HorizontalOptions="FillAndExpand" HeightRequest="45"
+                                                Margin="10,1,10,10" Placeholder="Search" PlaceholderColor="Gray"
+                                                PlaceholderFontFamily="{StaticResource Montserrat_Regular_Key}"
+                                                BackgroundColor="#FAFAFA"/>
+                    <Label Text="X" FontSize="25" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                           TextColor="{StaticResource DarkThemeColor}" HorizontalOptions="End"
+                           WidthRequest="25" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClearTextCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+          
+
+
+                <BoxView Grid.Row="1" VerticalOptions="Start" Color="Gray" 
+                         HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+                <ContentView Grid.Row="1"  BackgroundColor="{StaticResource MediumGrayColor}">
+                    <!--<ScrollView>
+                        <StackLayout BackgroundColor="Blue">
+                            <StackLayout BindableLayout.ItemsSource="{Binding FieldsList}" Margin="0,20,0,0" BackgroundColor="Transparent"
+                            BindableLayout.ItemTemplateSelector="{StaticResource ListDataTemplateSelector}">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ListView_ItemSelected"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            --><!--<ListView  ItemsSource="{Binding FieldsList}" HasUnevenRows="True" Margin="0,20,0,0" BackgroundColor="Transparent"
+                          SeparatorVisibility="None" ItemSelected="ListView_ItemSelected" ItemTemplate="{StaticResource ListDataTemplateSelector}"/>-->
+                            <!--<StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                                <Label Text="Load more" HorizontalOptions="Center"
+                                                       TextColor="{StaticResource ThemeColor}" FontSize="14"
+                                                   FontFamily="{StaticResource Montserrat_Medium_Key}" VerticalTextAlignment="Center"></Label>
+                            </StackLayout>--><!--
+                        </StackLayout>
+                    </ScrollView>-->
+                    <syncfusion:SfListView  ItemsSource="{Binding FieldsList}" Margin="0,20,0,0" BackgroundColor="Transparent"
+                           ItemTapped="SfListView_ItemTapped" LoadMoreOption="{Binding LoadMore}" IsBusy="{Binding IsFetching}" 
+                             LoadMoreCommand="{Binding LoadMoreItemsCommand}" SelectionBackgroundColor="Transparent"
+                               ItemTemplate="{StaticResource ListDataTemplateSelector}" ItemSize="{Binding ItemSize}"/>
+                </ContentView>
+                <commonviews:BottomLayoutView Grid.Row="2" HeightRequest="50"></commonviews:BottomLayoutView>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

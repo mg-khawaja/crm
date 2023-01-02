@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             xmlns:datatemplateselectors="clr-namespace:CrmStepMobileApp.DataTemplateSelectors"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                                     xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews"
+             xmlns:viewModel="clr-namespace:CrmStepMobileApp.ViewModels"
+             mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.Views.AddPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="IDEntryDataTemplate">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" 
+                                                IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewModel:AddPageViewModel}}, Path=IdEnabled}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent"/>
+                </StackLayout>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="EntryDataTemplate">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent"/>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DatePickerDataTemplate">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+                    <Grid  HeightRequest="38"  Margin="20,0" >
+                        <customcontrols:CustomLabel Text="{Binding TextValue,Converter={StaticResource ToViewDateTimeConvertor}}" FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                           VerticalTextAlignment="End" TextColor="{StaticResource ThemeColor}"/>
+                        <customcontrols:CustomImage Grid.Column="1" Source="menu.png" Aspect="AspectFit"  Rotation="270"
+                                                    TintColor="{StaticResource DarkThemeColor}"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                    </Grid>
+                    <!--<BoxView Color="{StaticResource ThemeColor}" HeightRequest="1" HorizontalOptions="FillAndExpand"/>-->
+                    <DatePicker IsVisible="False"></DatePicker>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DatePicker_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="SelectDataTemplate">
+                <StackLayout  Spacing="0">
+
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+                    <Grid  HeightRequest="38"  Margin="20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <customcontrols:CustomLabel  Text="{Binding TextValue}" FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                           VerticalTextAlignment="End" TextColor="{StaticResource ThemeColor}"/>
+                        <customcontrols:CustomImage Grid.Column="1" Source="menu.png" Aspect="AspectFit" Rotation="270"
+                                                    TintColor="{StaticResource DarkThemeColor}"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                    </Grid>
+
+                    <!--<BoxView Color="{StaticResource ThemeColor}" HeightRequest="1" HorizontalOptions="FillAndExpand"/>-->
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Select_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MultiSelectDataTemplate">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding MultiSelectedchoices}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid  HeightRequest="38"  Margin="20,0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+                                    <customcontrols:CustomLabel  Text="{Binding Name}" FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                                           VerticalTextAlignment="End" Margin="0,0,0,10" TextColor="{StaticResource ThemeColor}"/>
+                                    <CheckBox Grid.Column="1" HeightRequest="25" WidthRequest="25" IsChecked="{Binding IsChecked}"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                               Color="{StaticResource ThemeColor}" CheckedChanged="CheckBox_CheckedChanged"/>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TextAreaDataTemplate">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEditor Text="{Binding TextValue}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                FontSize="16" TextColor="{StaticResource ThemeColor}"
+                                                HeightRequest="100" Margin="20,10" Focused="CustomEditor_Focused"
+                                                 Unfocused="CustomEditor_Unfocused" BackgroundColor="{StaticResource WhiteColor}"/>
+
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="PhotoDataTemplate">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <forms:CachedImage Source="{Binding ImageUrl}" ErrorPlaceholder="loading.png" LoadingPlaceholder="loading.jpg"
+                                       HeightRequest="200" Aspect="AspectFill">
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Photo_Tapped"></TapGestureRecognizer>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+                    
+           
+
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="AutoCompleteDataTemplate">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent" TextChanged="SearchEntry_TextChanged"
+                                                Focused="SearchEntry_Focused" />
+
+                    <ScrollView>
+                        <StackLayout BindableLayout.ItemsSource="{Binding SearchList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentView>
+                                        <Label Text="{Binding Name}" Margin="30,10" 
+                                               FontSize="14" FontFamily="{StaticResource Montserrat_Bold_Key}"></Label>
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="SearchItem_Tapped"></TapGestureRecognizer>
+                                        </ContentView.GestureRecognizers>
+                                    </ContentView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="NumberDataTemplate">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent"  Focused="NumberEntry_Focused"
+                                                Unfocused="NumberEntry_Unfocused"/>
+                </StackLayout>
+            </DataTemplate>
+
+
+       
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+            <!--                           hebrew                                          -->
+
+
+            <DataTemplate x:Key="IDEntryDataTemplateHe">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" 
+                                                     FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                     VerticalOptions="CenterAndExpand"
+                                                     FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" 
+                                                IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewModel:AddPageViewModel}}, Path=IdEnabled}" 
+                                                HorizontalOptions="FillAndExpand"
+                                                TextFontFamily="{StaticResource Montserrat_Medium_Key}" 
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent" x:Name="IdHe"/>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EntryDataTemplateHe">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" 
+                                                     FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                     VerticalOptions="CenterAndExpand"
+                                                     FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" HorizontalOptions="FillAndExpand"
+                                                TextFontFamily="{StaticResource Montserrat_Medium_Key}" 
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent" />
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DatePickerDataTemplateHe">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}"
+                                                     FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+                    <Grid  HeightRequest="38"  Margin="20,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <customcontrols:CustomLabel Grid.Column="1" Text="{Binding TextValue,Converter={StaticResource ToViewDateTimeConvertor}}" 
+                               FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14" FlowDirection="RightToLeft"
+                              VerticalTextAlignment="End" TextColor="{StaticResource ThemeColor}"/>
+                        <customcontrols:CustomImage Grid.Column="0" Source="menu.png" Aspect="AspectFit"  
+                                                    TintColor="{StaticResource DarkThemeColor}" Rotation="90"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                   
+                    </Grid>
+                    <DatePicker IsVisible="False"></DatePicker>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DatePicker_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="SelectDataTemplateHe">
+                <StackLayout  Spacing="0">
+
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+                    <Grid  HeightRequest="38"  Margin="20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <customcontrols:CustomLabel Grid.Column="1" Text="{Binding TextValue}" 
+                               FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                           VerticalTextAlignment="End" TextColor="{StaticResource ThemeColor}"/>
+                        <customcontrols:CustomImage  Source="menu.png" Aspect="AspectFit" Rotation="90"
+                                                    TintColor="{StaticResource DarkThemeColor}"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                    </Grid>
+
+                    <!--<BoxView Color="{StaticResource ThemeColor}" HeightRequest="1" HorizontalOptions="FillAndExpand"/>-->
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Select_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MultiSelectDataTemplateHe">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding MultiSelectedchoices}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid  HeightRequest="38"  Margin="20,0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <customcontrols:CustomLabel Grid.Column="1" Text="{Binding Name}" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                           FontSize="14"
+                                           VerticalTextAlignment="End" Margin="0,0,0,10" TextColor="{StaticResource ThemeColor}"/>
+                                    <CheckBox  HeightRequest="25" WidthRequest="25" IsChecked="{Binding IsChecked}"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                               Color="{StaticResource ThemeColor}" CheckedChanged="CheckBox_CheckedChanged"/>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TextAreaDataTemplateHe">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEditor Text="{Binding TextValue}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                FontSize="16" TextColor="{StaticResource ThemeColor}"
+                                                HeightRequest="100" Margin="20,10" Focused="CustomEditor_Focused"
+                                                 Unfocused="CustomEditor_Unfocused" FlowDirection="RightToLeft"/>
+
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="PhotoDataTemplateHe">
+                <StackLayout Margin="0,10,0,0" Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <forms:CachedImage Source="{Binding ImageUrl}" ErrorPlaceholder="loading.png" LoadingPlaceholder="loading.jpg"
+                                       HeightRequest="200" Aspect="AspectFill">
+                        <forms:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Photo_Tapped"></TapGestureRecognizer>
+                        </forms:CachedImage.GestureRecognizers>
+                    </forms:CachedImage>
+
+
+
+                </StackLayout>
+            </DataTemplate>
+
+
+            <DataTemplate x:Key="AutoCompleteDataTemplateHe">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent" TextChanged="SearchEntry_TextChanged"
+                                                Focused="SearchEntry_Focused" />
+
+                    <ScrollView>
+                        <StackLayout BindableLayout.ItemsSource="{Binding SearchList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentView>
+                                        <Label Text="{Binding Name}" Margin="30,10" 
+                                               FontSize="14" FontFamily="{StaticResource Montserrat_Bold_Key}"></Label>
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="SearchItem_Tapped"></TapGestureRecognizer>
+                                        </ContentView.GestureRecognizers>
+                                    </ContentView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="NumberDataTemplateHe">
+                <StackLayout Spacing="0">
+                    <ContentView BackgroundColor="{StaticResource DarkGrayColor}" HeightRequest="35">
+                        <customcontrols:CustomLabel  Margin="20,0" Text="{Binding translatedTitle}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="14" />
+                    </ContentView>
+
+                    <customcontrols:CustomEntry Margin="20,0" Text="{Binding TextValue}" TextFontFamily="{StaticResource Montserrat_Medium_Key}"
+                                                TextFontSize="20" TextColor="{StaticResource ThemeColor}" 
+                                                HeightRequest="40" UnderlineColor="Transparent"  Focused="NumberEntry_Focused"
+                                                Unfocused="NumberEntry_Unfocused"/>
+                </StackLayout>
+            </DataTemplate>
+
+
+
+
+
+            <datatemplateselectors:LeadDataTemplateSelector x:Key="LeadDataTemplateSelector" 
+                                                            IDEntryDataTemplate="{StaticResource IDEntryDataTemplate}"
+                                                            EntryDataTemplate="{StaticResource EntryDataTemplate}"
+                                                            DateDataTemplate="{StaticResource DatePickerDataTemplate}"
+                                                            SelectDataTemplate="{StaticResource SelectDataTemplate}"
+                                                            MultiSelectDataTemplate="{StaticResource MultiSelectDataTemplate}"
+                                                            TextAreaDataTemplate="{StaticResource TextAreaDataTemplate}"
+                                                            PhotoDataTemplate="{StaticResource PhotoDataTemplate}"
+                                                            AutoCompleteDataTemplate="{StaticResource AutoCompleteDataTemplate}"
+                                                            NumberDataTemplate="{StaticResource NumberDataTemplate}"
+                                                            IDEntryDataTemplateHe="{StaticResource IDEntryDataTemplateHe}"
+                                                            EntryDataTemplateHe="{StaticResource EntryDataTemplateHe}"
+                                                            DateDataTemplateHe="{StaticResource DatePickerDataTemplateHe}"
+                                                            SelectDataTemplateHe="{StaticResource SelectDataTemplateHe}"
+                                                            MultiSelectDataTemplateHe="{StaticResource MultiSelectDataTemplateHe}"
+                                                            TextAreaDataTemplateHe="{StaticResource TextAreaDataTemplateHe}"
+                                                            PhotoDataTemplateHe="{StaticResource PhotoDataTemplateHe}"
+                                                            AutoCompleteDataTemplateHe="{StaticResource AutoCompleteDataTemplateHe}"
+                                                            NumberDataTemplateHe="{StaticResource NumberDataTemplateHe}"
+                                                            />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="{Binding MoreWidth}"/>
+
+                </Grid.ColumnDefinitions>
+                <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" HeightRequest="15" WidthRequest="15" TintColor="{StaticResource DarkThemeColor}">
+                    <customcontrols:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                    </customcontrols:CustomImage.GestureRecognizers>
+                </customcontrols:CustomImage>
+                <Label   Grid.Column="1" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="15" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                
+                <Label   Grid.Column="2" Text ="{translator:Translate Save}" TextColor="{StaticResource DarkThemeColor}" HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="Center" Margin="10" FontSize="15" IsVisible="{Binding ShowSubmit}"
+                        FontFamily="{StaticResource Montserrat_Medium_Key}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SaveCommand }"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <ContentView   Grid.Column="3"   IsVisible="{Binding ShowSubmit}">
+                    <customcontrols:CustomImage   Source="threeDots.png" Aspect="AspectFit"
+                   TintColor="{StaticResource ThemeColor}" Rotation="90" HorizontalOptions="StartAndExpand"
+                                            HeightRequest="25"/>
+                    <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MoreCommand}"></TapGestureRecognizer>
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+
+             
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="{StaticResource WhiteColor}" RowSpacing="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ScrollView x:Name="MainScroll">
+                    <StackLayout x:Name="MainStack" BindableLayout.ItemsSource="{Binding SectionsList}" Spacing="0" IsEnabled="{Binding ShowSubmit}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <ContentView HeightRequest="50" BackgroundColor="Gray">
+                                        <customcontrols:CustomLabel Text="{Binding translatedTitle}" Margin="20,0   "
+                                                                    VerticalOptions="FillAndExpand"
+                                               VerticalTextAlignment="Center" FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                               FontSize="20" TextColor="White"></customcontrols:CustomLabel>
+                                    </ContentView>
+                                    <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                        <StackLayout BindableLayout.ItemsSource="{Binding fields}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                    BindableLayout.ItemTemplateSelector="{StaticResource LeadDataTemplateSelector}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                  
+
+                </ScrollView>
+                <commonviews:BottomLayoutView Grid.Row="1" HeightRequest="50"></commonviews:BottomLayoutView>
+
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

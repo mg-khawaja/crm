@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             mc:Ignorable="d"
+              xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             x:Class="CrmStepMobileApp.Views.PopupView.SwitchProjectView">
+    <StackLayout Padding="20">
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="5">
+            <customcontrols:CustomCardView CornerRadius="20" IsClippedToBounds="True"  >
+          
+                    <StackLayout >
+                    <Label Text="{translator:Translate Company}" TextColor="{StaticResource ThemeColor}"
+                               FontSize="14" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                        <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding SelectedCompany.name}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="22"></Label>
+                            <customcontrols:CustomImage Source="menu.png" Aspect="AspectFit" Rotation="270"
+                                                        TintColor="{StaticResource DarkThemeColor}"
+                                                        HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                        HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CompanyCommand}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView Color="{StaticResource ThemeColor}" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+
+
+                    <Label Text="{translator:Translate Project}" TextColor="{StaticResource ThemeColor}"
+                               FontSize="14" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                       
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding SelectedProject.name}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="18"/>
+                            <customcontrols:CustomImage Source="menu.png" Aspect="AspectFit" Rotation="270"
+                                                        TintColor="{StaticResource DarkThemeColor}"
+                                                        HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                        HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ProjectCommand}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView Color="{StaticResource ThemeColor}" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+
+                    <customcontrols:CustomButton Text="{translator:Translate Switch}" TextColor="{StaticResource ThemeColor}"
+                                                 FontFamily="{StaticResource Montserrat_Medium_Key}" BackgroundColor="Transparent"
+                                                 BorderColor="{StaticResource ThemeColor}" BorderWidth="2"
+                                                 Command="{Binding SwitchCommand}"></customcontrols:CustomButton>
+                    <customcontrols:CustomButton Text="{translator:Translate Cancel}" TextColor="White"
+                                                 FontFamily="{StaticResource Montserrat_Medium_Key}" BackgroundColor="OrangeRed"
+                                                 Command="{Binding CancelCommand}"></customcontrols:CustomButton>
+                </StackLayout>
+            </customcontrols:CustomCardView>
+        </StackLayout>
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+        </StackLayout.GestureRecognizers>
+    </StackLayout>
+</pages:PopupPage>

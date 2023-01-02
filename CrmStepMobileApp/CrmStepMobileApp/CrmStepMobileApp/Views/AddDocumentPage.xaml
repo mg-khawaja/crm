@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+                         xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews"
+             x:Class="CrmStepMobileApp.Views.AddDocumentPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" TintColor="{StaticResource DarkThemeColor}" HeightRequest="15" WidthRequest="15">
+                    <customcontrols:CustomImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                    </customcontrols:CustomImage.GestureRecognizers>
+                </customcontrols:CustomImage>
+                <Label   Grid.Column="1" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="15" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+    
+
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="{StaticResource MediumGrayColor}">
+
+                <customcontrols:CustomCardView  Margin="20"  CornerRadius="10" VerticalOptions="Start"  IsVisible="{Binding EngVisibility}">
+                    <StackLayout>
+
+                        <Label  Text="{translator:Translate Title}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }"
+                           HorizontalOptions="FillAndExpand"></Label>
+                        <customcontrols:CustomEntry  Text="{Binding Title}" TextColor="{StaticResource ThemeColor}"
+                                                TextFontFamily="{StaticResource Montserrat_Medium_Key}" TextFontSize="20"
+                                                HorizontalOptions="FillAndExpand"/>
+                        
+                        
+                        
+
+                        <Label Text="{translator:Translate User}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }" 
+                           HorizontalOptions="FillAndExpand" Margin="0,25,0,0"></Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding SelectedUser.Text}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="20"
+                              HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"/>
+                            <customcontrols:CustomImage Source="menu.png" Aspect="AspectFit"  Rotation="270"
+                                                    TintColor="{StaticResource DarkThemeColor}"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectUserCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+
+
+
+                        <Label  Text="{translator:Translate File}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }" Margin="0,25,0,0"
+                           HorizontalOptions="FillAndExpand"></Label>
+                        <Grid HeightRequest="40" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <customcontrols:CustomButton Text="{translator:Translate Upload}" TextColor="{StaticResource ThemeColor}"
+                                                          BackgroundColor="Transparent" BorderColor="{StaticResource ThemeColor}"
+                                                         BorderWidth="1" Command="{Binding UploadCommand}"  />
+                            <customcontrols:CustomButton Grid.Column="1" Text="{translator:Translate TakePhoto}" TextColor="White"
+                                                          BackgroundColor="{StaticResource ThemeColor}"
+                                                          Command="{Binding TakeCommand}"/>
+                        </Grid>
+                        <Label Text="{Binding FileName}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="15"
+                              HorizontalOptions="FillAndExpand"/>
+
+
+                        <customcontrols:CustomButton Text="{translator:Translate Save}" TextColor="White"
+                                                     BackgroundColor="{StaticResource DarkThemeColor}" CornerRadius="10"
+                                                     HeightRequest="50" HorizontalOptions="FillAndExpand"
+                                                     Margin="20" Command="{Binding SaveCommand}"></customcontrols:CustomButton>
+
+                    </StackLayout>
+                </customcontrols:CustomCardView>
+                <customcontrols:CustomCardView  Margin="20"  CornerRadius="10" VerticalOptions="Start" IsVisible="{Binding HeVisibility}">
+                    <StackLayout>
+
+
+                        <Label  Text="{translator:Translate Title}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }"
+                           HorizontalOptions="EndAndExpand"></Label>
+                        <customcontrols:CustomEntry  Text="{Binding Title}" TextColor="{StaticResource ThemeColor}"
+                                                TextFontFamily="{StaticResource Montserrat_Medium_Key}" TextFontSize="20"
+                                                HorizontalOptions="FillAndExpand" />
+
+
+
+
+                        <Label Text="{translator:Translate User}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }" 
+                           HorizontalOptions="EndAndExpand" Margin="0,25,0,0"></Label>
+                        <StackLayout Orientation="Horizontal">
+
+                            <customcontrols:CustomImage Source="menu.png" Aspect="AspectFit" 
+                                                    TintColor="{StaticResource DarkThemeColor}"
+                                                    HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="20" WidthRequest="20"></customcontrols:CustomImage>
+                        
+
+                            <Label Text="{Binding SelectedUser.Text}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="20"
+                              HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectUserCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+
+
+
+                        <Label  Text="{translator:Translate File}" TextColor="{StaticResource ThemeColor}"
+                           FontSize="20" FontFamily="{StaticResource Montserrat_Bold_Key }" Margin="0,25,0,0"
+                           HorizontalOptions="FillAndExpand" ></Label>
+                        <Grid HeightRequest="40" HorizontalOptions="FillAndExpand" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <customcontrols:CustomButton Text="{translator:Translate Upload}" TextColor="{StaticResource ThemeColor}"
+                                                          BackgroundColor="Transparent" BorderColor="{StaticResource ThemeColor}"
+                                                         BorderWidth="1" Command="{Binding UploadCommand}" />
+                            <customcontrols:CustomButton Grid.Column="1" Text="{translator:Translate TakePhoto}" TextColor="White"
+                                                          BackgroundColor="{StaticResource ThemeColor}"
+                                                          Command="{Binding TakeCommand}" />
+                        </Grid>
+                        <Label Text="{Binding FileName}" TextColor="{StaticResource ThemeColor}"
+                               FontFamily="{StaticResource Montserrat_Medium_Key}" FontSize="15"
+                              HorizontalOptions="EndAndExpand" />
+
+
+                        <customcontrols:CustomButton Text="{translator:Translate Save}" TextColor="White"
+                                                     BackgroundColor="{StaticResource DarkThemeColor}" CornerRadius="10"
+                                                     HeightRequest="50" HorizontalOptions="FillAndExpand"
+                                                     Margin="20" Command="{Binding SaveCommand}"></customcontrols:CustomButton>
+
+
+                    </StackLayout>
+                </customcontrols:CustomCardView>
+
+            </Grid>
+            <commonviews:BottomLayoutView Grid.Row="2" HeightRequest="50"></commonviews:BottomLayoutView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

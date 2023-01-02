@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+                  xmlns:datatemplateselectors="clr-namespace:CrmStepMobileApp.DataTemplateSelectors"
+                  mc:Ignorable="d"
+             x:Class="CrmStepMobileApp.Views.MenuPage">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Default">
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="EnglishDataTemplate">
+                        <StackLayout VerticalOptions="Start">
+                            <Grid HeightRequest="45">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding Icon}" Aspect="AspectFit"
+                                               Margin="10"/>
+                                <Label Grid.Column="1" Text="{Binding Title}" TextColor="White" FontSize="Medium"
+                                               VerticalTextAlignment="Center" Margin="10,0,20,0" 
+                                               FontFamily="{StaticResource Montserrat_Medium_Key}"/>
+                            </Grid>
+                            <Label BackgroundColor="{StaticResource WhiteColor}" HorizontalOptions="FillAndExpand" HeightRequest="1"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                    <DataTemplate x:Key="HebrewDataTemplate">
+                        <StackLayout>
+                            <Grid HeightRequest="45">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="1" Source="{Binding Icon}" Aspect="AspectFit"
+                                               Margin="10"/>
+                                <Label Grid.Column="0" Text="{Binding Title}" TextColor="White" FontSize="Medium"
+                                               VerticalTextAlignment="Center" Margin="10,0,20,0" 
+                                               FontFamily="{StaticResource Montserrat_Medium_Key}"/>
+                            </Grid>
+                            <Label BackgroundColor="{StaticResource WhiteColor}" HorizontalOptions="FillAndExpand" HeightRequest="1"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+
+
+                    <datatemplateselectors:HomePageDataTemplateSelector x:Key="MenuDataTemplateSelector"
+                                                                EnglishTemplate="{StaticResource EnglishDataTemplate}"
+                                                                HebrewTemplate="{StaticResource HebrewDataTemplate}"/>
+
+                </ResourceDictionary>
+            </ContentPage.Resources>
+            <ScrollView BackgroundColor="{StaticResource ThemeColor}">
+                <StackLayout Spacing="0">
+                    <StackLayout HeightRequest="250" BackgroundColor="{StaticResource MediumGrayColor}" >
+                        <customcontrols:CustomImage Aspect="AspectFit" HorizontalOptions="CenterAndExpand"
+                                                     TintColor="{StaticResource DarkThemeColor}" Scale="1.7"
+                                                    Source="logo.png" HeightRequest="150" WidthRequest="150"
+                                                    VerticalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="50">
+                            <customcontrols:CustomImage Source="menu_add.png" Aspect="AspectFit" HeightRequest="30"
+                                                        WidthRequest="30" TintColor="{StaticResource DarkThemeColor}">
+                                <customcontrols:CustomImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddCommand}"/>
+                                </customcontrols:CustomImage.GestureRecognizers>
+                            </customcontrols:CustomImage>
+                            <customcontrols:CustomImage Source="switch_menu.png" Aspect="AspectFit" HeightRequest="30"
+                                                        WidthRequest="30" TintColor="{StaticResource DarkThemeColor}">
+                                <customcontrols:CustomImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SwitchCommand}"/>
+                                </customcontrols:CustomImage.GestureRecognizers>
+                            </customcontrols:CustomImage>
+                            <Grid>
+                                <customcontrols:CustomImage Source="bell.png" Aspect="AspectFit" HeightRequest="30"
+                                                        WidthRequest="30" TintColor="{StaticResource DarkThemeColor}">
+                                    <customcontrols:CustomImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BellCommand}"/>
+                                    </customcontrols:CustomImage.GestureRecognizers>
+                                </customcontrols:CustomImage>
+                                <customcontrols:CustomCardView HeightRequest="20" WidthRequest="20" Padding="0" TranslationX="-10" TranslationY="-10"
+                                                               BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="Start"
+                                                               CornerRadius="20" IsVisible="{Binding NotificationsVisibility}">
+                                    <Label Text="{Binding NotificationsCount}" TextColor="White" FontFamily="{StaticResource Montserrat_Regular_Key}"
+                                           FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                </customcontrols:CustomCardView>
+                            </Grid>
+                            
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout BindableLayout.ItemsSource="{Binding MenusList}" Orientation="Vertical" VerticalOptions="StartAndExpand"
+                                 
+                                 BindableLayout.ItemTemplateSelector="{StaticResource MenuDataTemplateSelector}"/>
+
+
+                </StackLayout>
+            </ScrollView>
+
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

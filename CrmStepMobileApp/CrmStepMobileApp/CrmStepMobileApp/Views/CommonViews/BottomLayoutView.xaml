@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+                               xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             x:Class="CrmStepMobileApp.Views.CommonViews.BottomLayoutView">
+
+    <Grid BackgroundColor="{StaticResource DarkThemeColor}" RowSpacing="0" ColumnSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Column="0" Padding="0,5" Spacing="0" >
+            <customcontrols:CustomImage Source="dashboard.png" Aspect="AspectFit"
+                      HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+            <!--<Label Text="{translator:Translate SwitchLanguage}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="0"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+       
+        <StackLayout Grid.Column="1"   Padding="0,5"  Spacing="0">
+            <customcontrols:CustomImage Source="switch_menu.png" Aspect="AspectFit"
+                       HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+            <!--<Label Text="{translator:Translate Leads}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="1"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+
+     
+
+        <StackLayout Grid.Column="2"   Padding="0,5"  Spacing="0">
+            <customcontrols:CustomImage Source="menu_add.png" Aspect="AspectFit"
+                       HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+            <!--<Label Text="{translator:Translate Companies}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="2"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+
+        <StackLayout Grid.Column="3"  Padding="0,5"  Spacing="0">
+            <Grid HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand">
+                <customcontrols:CustomImage Source="bell.png" Aspect="AspectFit"
+                      HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+                <customcontrols:CustomCardView HeightRequest="20" WidthRequest="20" Padding="0" TranslationX="40" TranslationY="-13"
+                                                               BackgroundColor="{StaticResource ThemeColor}" HorizontalOptions="Start" VerticalOptions="Start"
+                                                               CornerRadius="10" IsVisible="{Binding NotificationsVisibility}">
+                    <Label Text="{Binding NotificationsCount}" TextColor="White" FontFamily="{StaticResource Montserrat_Regular_Key}"
+                                           FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </customcontrols:CustomCardView>
+            </Grid>
+
+
+          
+            <!--<Label Text="{translator:Translate Contacts}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="3"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        <StackLayout Grid.Column="4" Padding="0,5" Spacing="0" >
+            <customcontrols:CustomImage Source="language.png" Aspect="AspectFit"
+                      HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+            <!--<Label Text="{translator:Translate SwitchLanguage}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="4"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        <StackLayout Grid.Column="5"  Padding="0,5"  Spacing="0">
+            <customcontrols:CustomImage Source="logout.png" Aspect="AspectFit"
+                       HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" TintColor="White"/>
+            <!--<Label Text="{translator:Translate Deals}" TextColor="White"
+                   FontSize="14" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" 
+                   FontFamily="{StaticResource Montserrat_Medium_Key}"/>-->
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTapCommand}" CommandParameter="5"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+
+       
+
+
+    </Grid>
+</ContentView>

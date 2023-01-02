@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>פעולות</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>הוסף</value>
+  </data>
+  <data name="AddressFrom" xml:space="preserve">
+    <value>כתובת איסוף</value>
+  </data>
+  <data name="AddressTo" xml:space="preserve">
+    <value>כתובת יעד</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>סכום</value>
+  </data>
+  <data name="AmountWithVat" xml:space="preserve">
+    <value>סכום עם מע"מ</value>
+  </data>
+  <data name="AssignedFor" xml:space="preserve">
+    <value>מודול</value>
+  </data>
+  <data name="AssignTo" xml:space="preserve">
+    <value>להקצות ל</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>בטל</value>
+  </data>
+  <data name="Companies" xml:space="preserve">
+    <value>חברות</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>החברה</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>שם חברה</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>איש קשר</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>אנשי קשר</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>לספור</value>
+  </data>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>נוצר ב</value>
+  </data>
+  <data name="CustomerBirthday" xml:space="preserve">
+    <value>ימי הולדת</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>יומי</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>לוח מחוונים</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>יום</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>ימים</value>
+  </data>
+  <data name="Deals" xml:space="preserve">
+    <value>עסקאות</value>
+  </data>
+  <data name="DealStage" xml:space="preserve">
+    <value>סטטוס עסקה</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>תאור</value>
+  </data>
+  <data name="DocumentAddedSuccessully" xml:space="preserve">
+    <value>המסמך נשמר</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>מסמכים</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>אימייל</value>
+  </data>
+  <data name="EndsOn" xml:space="preserve">
+    <value>נגמר ב</value>
+  </data>
+  <data name="EnterBothFields" xml:space="preserve">
+    <value>אנא הכנס את שני השדות כדי להמשיך</value>
+  </data>
+  <data name="EventCannotBeAdded" xml:space="preserve">
+    <value>לא ניתן להוסיף אירוע</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>אירועים</value>
+  </data>
+  <data name="EventUpdated" xml:space="preserve">
+    <value>האירוע עודכן</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>קובץ</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>שם קובץ</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>שם פרטי</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>סדר יום</value>
+  </data>
+  <data name="HotSaleProducts" xml:space="preserve">
+    <value>מוצרים למכירה חמה</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>מזהה</value>
+  </data>
+  <data name="IncompleteEvents" xml:space="preserve">
+    <value>אירועים מוזנחים</value>
+  </data>
+  <data name="IsAllDay" xml:space="preserve">
+    <value>כל היום</value>
+  </data>
+  <data name="IsCompleted" xml:space="preserve">
+    <value>הושלם</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>שם משפחה</value>
+  </data>
+  <data name="Leads" xml:space="preserve">
+    <value>לידים</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>טוען מידע</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>מקום</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>התנתק</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>טלפון נייד</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>חודש</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>חודשי</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>שם</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>לעולם לא</value>
+  </data>
+  <data name="NoNewNotifications" xml:space="preserve">
+    <value>אין התראות חדשות</value>
+  </data>
+  <data name="NoPermissions" xml:space="preserve">
+    <value>אין לך הרשאות להמשיך</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>בסדר</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>סיסמה</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>טלפון</value>
+  </data>
+  <data name="Priorty" xml:space="preserve">
+    <value>עדיפות</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>פרויקט</value>
+  </data>
+  <data name="ReccurenceRuleNotValid" xml:space="preserve">
+    <value>כלל הישנות אינו חוקי</value>
+  </data>
+  <data name="RecentDeals" xml:space="preserve">
+    <value>מבצעים אחרונים</value>
+  </data>
+  <data name="RecentLeads" xml:space="preserve">
+    <value>לידים אחרונים</value>
+  </data>
+  <data name="RecordAddedSuccess" xml:space="preserve">
+    <value>רשומה נוספה בהצלחה!</value>
+  </data>
+  <data name="Repeat" xml:space="preserve">
+    <value>חזור</value>
+  </data>
+  <data name="ResponsiblePerson" xml:space="preserve">
+    <value>משתמש</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>שמור</value>
+  </data>
+  <data name="Scheduler" xml:space="preserve">
+    <value>לוח שנה</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>בחר</value>
+  </data>
+  <data name="SelectView" xml:space="preserve">
+    <value>בחר תצוגה</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>הצג הכול</value>
+  </data>
+  <data name="SiteOrders" xml:space="preserve">
+    <value>הזמנות מאתר</value>
+  </data>
+  <data name="StartsOn" xml:space="preserve">
+    <value>מתחיל</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>סטטוס</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>נושא</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>החלף</value>
+  </data>
+  <data name="SwitchLanguage" xml:space="preserve">
+    <value>החלף שפה</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>לצלם</value>
+  </data>
+  <data name="Tickets" xml:space="preserve">
+    <value>קריאות</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>כותרת</value>
+  </data>
+  <data name="TodayEvents" xml:space="preserve">
+    <value>האירועים של היום</value>
+  </data>
+  <data name="Until" xml:space="preserve">
+    <value>עד</value>
+  </data>
+  <data name="UpdatedOn" xml:space="preserve">
+    <value>עודכן בתאריך</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>להעלות</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>משתמש</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>שם משתמש</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>שבוע</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>שבועי</value>
+  </data>
+  <data name="WorkWeek" xml:space="preserve">
+    <value>שבוע עבודה</value>
+  </data>
+  <data name="Yearly" xml:space="preserve">
+    <value>שנתי</value>
+  </data>
+</root>

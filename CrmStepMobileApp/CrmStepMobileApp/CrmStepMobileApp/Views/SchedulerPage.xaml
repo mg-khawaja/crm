@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customcontrols="clr-namespace:CrmStepMobileApp.CustomControls"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:syncfusion1="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+             mc:Ignorable="d"
+                        xmlns:translator="clr-namespace:CrmStepMobileApp.Helper"
+             xmlns:commonviews="clr-namespace:CrmStepMobileApp.Views.CommonViews"
+             x:Class="CrmStepMobileApp.Views.SchedulerPage">
+        <ContentPage.Content>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <customcontrols:CustomImage Grid.Column="0"  Source="back.png" Aspect="AspectFit"
+                       Margin="13" TintColor="{StaticResource DarkThemeColor}" HeightRequest="15" WidthRequest="15">
+                        <customcontrols:CustomImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                        </customcontrols:CustomImage.GestureRecognizers>
+                    </customcontrols:CustomImage>
+                    <Label   Grid.Column="1" Text ="{Binding PageTitle}" TextColor="{StaticResource DarkThemeColor}"
+                         VerticalOptions="Center"  HorizontalOptions="Center"  
+                         FontSize="15" FontFamily="{StaticResource Montserrat_Bold_Key}"/>
+                    <StackLayout Grid.Column="2" Orientation="Horizontal" Margin="20,0" HorizontalOptions="EndAndExpand">
+                        <customcontrols:CustomImage   Source="add.png" Aspect="AspectFit" HeightRequest="12" WidthRequest="12"
+                                                  TintColor="{StaticResource DarkThemeColor}" VerticalOptions="CenterAndExpand"/>
+                        <Label  Text="{translator:Translate Add}" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                       TextColor="{StaticResource ThemeColor}" HorizontalOptions="Start"
+                       VerticalOptions="CenterAndExpand" FontSize="12"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1"  RowSpacing="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <StackLayout Spacing="0" BackgroundColor="{StaticResource DarkThemeColor}">
+                        <Grid HeightRequest="40" BackgroundColor="{StaticResource DarkThemeColor}" Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <ContentView Padding="0,0,10,0">
+                                    <customcontrols:CustomImage Source="back.png" Aspect="AspectFit"
+                                                        TintColor="White" VerticalOptions="CenterAndExpand"
+                                                        HeightRequest="15" WidthRequest="15" />
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Backward" ></TapGestureRecognizer>
+                                    </ContentView.GestureRecognizers>
+                                </ContentView>
+                                <ContentView Padding="10,0,0,0">
+
+                                    <customcontrols:CustomImage Source="back.png" Aspect="AspectFit"
+                                                      TintColor="White" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="15" WidthRequest="15" Rotation="180"/>
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Forward"></TapGestureRecognizer>
+                                    </ContentView.GestureRecognizers>
+                                </ContentView>
+
+                                <StackLayout Orientation="Horizontal" 
+                                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding CalendarDatesStr}" TextColor="White" 
+                                       HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand"
+                                       FontFamily="{StaticResource Montserrat_Bold_Key}" 
+                                       FontSize="{Binding CalendarDatesStr,Converter={StaticResource TextFontSizeConvertor}}" />
+
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SelectCalendar"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+
+
+                            </StackLayout>
+                            <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Color="White"/>
+                            <Label  Grid.Column="2" Text="{Binding SchedulerViewTypeModel.Name}" TextColor="White" VerticalOptions="CenterAndExpand" 
+                               FontFamily="{StaticResource Montserrat_Regular_Key}" FontSize="15" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectScheduleViewCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <BoxView Grid.Column="3" VerticalOptions="FillAndExpand" Color="White"/>
+                            <customcontrols:CustomImage  x:Name="FilterImage" Grid.Column="4" Source="back.png" Aspect="AspectFit"
+                                                         Rotation="270" HorizontalOptions="End"
+                                                         TintColor="White" VerticalOptions="CenterAndExpand"
+                                                         HeightRequest="15" WidthRequest="15" >
+                                <customcontrols:CustomImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Filter_Tapped"></TapGestureRecognizer>
+                                </customcontrols:CustomImage.GestureRecognizers>
+                            </customcontrols:CustomImage>
+                            <!--{Binding SelectedScheduleView}-->
+                        </Grid>
+                    <ScrollView  IsVisible="{Binding FilterVisibility}">
+                        <StackLayout  IsVisible="{Binding FilterVisibility}">
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
+                            <Label Text="Filter by Resources" TextColor="White" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               FontSize="18" Margin="20,0"/>
+                            <StackLayout BindableLayout.ItemsSource="{Binding MultiSelectedchoices}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid  HeightRequest="38"  Margin="20,0" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="25"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding Text}" FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                                           VerticalTextAlignment="End" Margin="0,0,0,10" TextColor="White"/>
+                                            <CheckBox Grid.Column="1" HeightRequest="25" WidthRequest="25" IsChecked="{Binding IsChecked}"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                               Color="White" CheckedChanged="CheckBox_CheckedChanged"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </StackLayout>
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
+
+                            <Label Text="Search" TextColor="White" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               FontSize="18" Margin="20,0" VerticalTextAlignment="End" TranslationY="10"/>
+                            <customcontrols:CustomEntry Margin="20,0" Text="{Binding SearchText}" TextColor="White"
+                                                    TextFontFamily="{StaticResource Montserrat_Bold_Key}" TextFontSize="14"
+                                                    UnderlineColor="White" TintColor="White"/>
+                            <Label Text="Start Date" TextColor="White" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               FontSize="18" Margin="20,10,20,0"/>
+
+                            <StackLayout  Margin="20,0">
+                                <Grid  HeightRequest="20">
+                                    <Label Text="{Binding StartDate,Converter={StaticResource ToViewDateTimeConvertor}}"
+                                   FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                           VerticalTextAlignment="End" TextColor="White"/>
+                                    <customcontrols:CustomImage Grid.Column="1" Source="menu.png" Aspect="AspectFit"  Rotation="270"
+                                                    TintColor="White"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="15" WidthRequest="15"></customcontrols:CustomImage>
+
+                                </Grid>
+                                <BoxView HeightRequest="1" BackgroundColor="White" HorizontalOptions="FillAndExpand"
+                                     Margin="0,5"></BoxView>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="StartDateTapped"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+
+                            <DatePicker x:Name="StartDatePicker" IsVisible="False"></DatePicker>
+
+                            <StackLayout>
+
+                                <Label Text="End Date" TextColor="White" FontFamily="{StaticResource Montserrat_Medium_Key}"
+                               FontSize="18" Margin="20,10,20,0"/>
+                                <Grid  HeightRequest="20" Margin="20,0">
+                                    <Label Text="{Binding EndDate,Converter={StaticResource ToViewDateTimeConvertor}}"
+                                   FontFamily="{StaticResource Montserrat_Bold_Key}" FontSize="14"
+                           VerticalTextAlignment="End" TextColor="White"/>
+                                    <customcontrols:CustomImage Grid.Column="1" Source="menu.png" Aspect="AspectFit"  Rotation="270"
+                                                    TintColor="White"
+                                                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                                                    HeightRequest="15" WidthRequest="15"></customcontrols:CustomImage>
+
+                                </Grid>
+                                <BoxView HeightRequest="1" BackgroundColor="White" HorizontalOptions="FillAndExpand"
+                                     Margin="20,5"></BoxView>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="EndDateTapped"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+
+
+
+
+                            <DatePicker x:Name="EndDatePicker" IsVisible="False"></DatePicker>
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" Color="White" Margin="0,10,0,0"></BoxView>
+                            <Grid Margin="10,0,10,10">
+                                <customcontrols:CustomButton Text="Filter" TextColor="White" BorderColor="White"
+                                                         BackgroundColor="Transparent" FontSize="20" BorderWidth="2"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}" Clicked="CustomButton_Clicked" Command="{Binding FilterCommand}"/>
+
+                                <customcontrols:CustomButton Grid.Column="1" Text="Clear" TextColor="{StaticResource DarkThemeColor}" 
+                                                         BackgroundColor="White" FontSize="20"
+                                                         FontFamily="{StaticResource Montserrat_Bold_Key}"
+                                                         Command="{Binding ClearCommand}"/>
+                            </Grid>
+                        </StackLayout>
+
+                    </ScrollView>
+                    <syncfusion1:SfSchedule x:Name="schedule" DataSource="{Binding Events}" IsVisible="{Binding SchedulerVisibility}"
+                                            ScheduleView="{Binding SchedulerViewTypeModel.ScheduleView}"
+                                            VerticalOptions="FillAndExpand" HeaderHeight="1" ViewHeaderHeight="85"
+                                            TimeInterval="30" TimeIntervalHeight="100" FlowDirection="RightToLeft"
+                                            VisibleDatesChangedCommand="{Binding VisibleDatesChangedCommand}" 
+                                            CellTapped="schedule_CellTapped" MonthInlineAppointmentTapped="schedule_MonthInlineAppointmentTapped"
+                                            AllowAppointmentDrag="True">
+                        <syncfusion1:SfSchedule.DragDropSettings>
+                            <syncfusion1:DragDropSettings AllowNavigate="False" AllowScroll="true" ShowTimeIndicator="true">
+                                <!--<syncfusion1:DragDropSettings.TimeIndicatorStyle>
+                                    <syncfusion1:TimeIndicatorStyle TextColor="Red" TextSize="13" TextFormat="hh:mm">
+                                    </syncfusion1:TimeIndicatorStyle>
+                                </syncfusion1:DragDropSettings.TimeIndicatorStyle>-->
+                            </syncfusion1:DragDropSettings>
+                        </syncfusion1:SfSchedule.DragDropSettings>
+                      
+
+                        <syncfusion1:SfSchedule.MonthViewSettings>
+                                 
+                                    <syncfusion1:MonthViewSettings  ShowAgendaView="true" >
+
+                  
+
+                                <syncfusion1:MonthViewSettings.AgendaViewStyle>
+                                            <syncfusion1:AgendaViewStyle DateFontColor="{StaticResource DarkThemeColor}" HeaderHeight="45" 
+                                                                         DateFormat="dd MMMM, yyyy" DateFontAttributes="Bold" 
+                                                                         DateFontSize="14" 
+                                                                         TimeFontColor="White" TimeFontSize="13" 
+                                                                         TimeFormat="HH:mm"
+                                                                          TimeFontAttributes="Bold" BackgroundColor="White" SubjectFontColor="Yellow" 
+                                                                         SubjectFontSize="18" SubjectFontFamily="Arial" />
+                                        </syncfusion1:MonthViewSettings.AgendaViewStyle>
+                                    </syncfusion1:MonthViewSettings>
+                                </syncfusion1:SfSchedule.MonthViewSettings>
+
+
+                            <syncfusion1:SfSchedule.ViewHeaderStyle>
+                                <syncfusion1:ViewHeaderStyle BackgroundColor="{StaticResource ThemeColor}" 
+				                                         DayTextColor="#FFFFFF"  DateTextColor="#FFFFFF" 
+                                                         DateFontSize="20" 
+                                                             DayFontAttributes="Bold" DayFontSize="12" 
+                                                         CurrentDateTextColor="White" CurrentDayTextColor="White">
+
+
+                                </syncfusion1:ViewHeaderStyle>
+                            </syncfusion1:SfSchedule.ViewHeaderStyle>
+                        </syncfusion1:SfSchedule>
+                    </StackLayout>
+
+                <commonviews:BottomLayoutView Grid.Row="1" HeightRequest="50"></commonviews:BottomLayoutView>
+
+
+            </Grid>
+            </Grid>
+        </ContentPage.Content>
+
+</ContentPage>
