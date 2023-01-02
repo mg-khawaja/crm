@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CrmStepMobileApp.Services
 {
+
    public class HttpClientBase :ApiBase
     {
         public string BaseUrl = "https://api.crmstep.com/";
