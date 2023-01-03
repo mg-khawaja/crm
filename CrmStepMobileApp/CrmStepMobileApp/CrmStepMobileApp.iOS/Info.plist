@@ -49,7 +49,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs access to the photo gallery.</string>
 	<key>CFBundleShortVersionString</key>
-	<string>7.007</string>
+	<string>7.009</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>he</string>
 	<key>CFBundleLocalizations</key>
@@ -60,6 +60,6 @@
 	<key>MinimumOSVersion</key>
 	<string>9.0</string>
 	<key>CFBundleVersion</key>
-	<string>59</string>
+	<string>61</string>
 </dict>
 </plist>
