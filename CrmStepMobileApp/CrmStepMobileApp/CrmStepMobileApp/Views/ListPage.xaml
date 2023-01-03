@@ -14,8 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="LeadsDataTemplate">
-                <ViewCell>
-                    <StackLayout Margin="10">
+                <StackLayout Margin="10">
                         <StackLayout Orientation="Horizontal" Margin="10,5" HeightRequest="25" HorizontalOptions="CenterAndExpand">
                             <Label Text="{translator:Translate CreatedOn}" HorizontalOptions="Center"
                                                        TextColor="Gray" FontSize="14"
@@ -130,7 +129,6 @@
                         </customcontrols:CustomCardView>
 
                     </StackLayout>
-                </ViewCell>
             </DataTemplate>
             <DataTemplate x:Key="HeLeadsDataTemplate">
                 <ViewCell>
@@ -1206,8 +1204,9 @@
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
             </Grid>
-            <Grid Grid.Row="1"  RowSpacing="0" >
+            <Grid Grid.Row="1"  RowSpacing="0" BackgroundColor="{StaticResource MediumGrayColor}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
@@ -1216,7 +1215,7 @@
                 <BoxView Grid.Row="0" VerticalOptions="Start" Color="Gray" 
                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
 
-                <StackLayout  Grid.Row="0"  Orientation="Horizontal" Padding="15,0" >
+                <StackLayout  Grid.Row="1"  Orientation="Horizontal" Padding="15,0" BackgroundColor="#FAFAFA">
                     <customcontrols:CustomImage Source="search.png" VerticalOptions="CenterAndExpand" 
                                                 Aspect="AspectFit" HeightRequest="30" WidthRequest="30"
                                                 TintColor="{StaticResource DarkThemeColor}">
@@ -1239,12 +1238,12 @@
                     </Label>
                 </StackLayout>
 
-          
-
-
-                <BoxView Grid.Row="1" VerticalOptions="Start" Color="Gray" 
+                <BoxView Grid.Row="2" VerticalOptions="Start" Color="Gray" 
                          HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
-                <ContentView Grid.Row="1"  BackgroundColor="{StaticResource MediumGrayColor}">
+
+                <Grid Grid.Row="2"  BackgroundColor="{StaticResource MediumGrayColor}" VerticalOptions="FillAndExpand">
+                    <ScrollView VerticalOptions="FillAndExpand">
+                        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource MediumGrayColor}">
                     <!--<ScrollView>
                         <StackLayout BackgroundColor="Blue">
                             <StackLayout BindableLayout.ItemsSource="{Binding FieldsList}" Margin="0,20,0,0" BackgroundColor="Transparent"
@@ -1262,13 +1261,30 @@
                             </StackLayout>--><!--
                         </StackLayout>
                     </ScrollView>-->
-                    <syncfusion:SfListView  ItemsSource="{Binding FieldsList}" Margin="0,20,0,0" BackgroundColor="Transparent"
-                           ItemTapped="SfListView_ItemTapped" LoadMoreOption="{Binding LoadMore}" IsBusy="{Binding IsFetching}" 
+                    <StackLayout VerticalOptions="StartAndExpand" BackgroundColor="Transparent">
+                        <StackLayout BindableLayout.ItemsSource="{Binding FieldsList}" Margin="0,10,0,0" BackgroundColor="Transparent"
+                                 BindableLayout.ItemTemplateSelector="{StaticResource ListDataTemplateSelector}">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ListView_ItemSelected"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                    <!--<syncfusion:SfListView  ItemsSource="{Binding FieldsList}" Margin="0,20,0,0" BackgroundColor="Transparent"
+                           ItemTapped="SfListView_ItemTapped" LoadMoreOption="None" IsBusy="{Binding IsFetching}" 
                              LoadMoreCommand="{Binding LoadMoreItemsCommand}" SelectionBackgroundColor="Transparent"
-                               ItemTemplate="{StaticResource ListDataTemplateSelector}" ItemSize="{Binding ItemSize}"/>
-                </ContentView>
-                <commonviews:BottomLayoutView Grid.Row="2" HeightRequest="50"></commonviews:BottomLayoutView>
-
+                               ItemTemplate="{StaticResource ListDataTemplateSelector}" ItemSize="{Binding ItemSize}"/>-->
+                    <Button Text="{translator:Translate LoadMore}" HorizontalOptions="Center"
+                       TextColor="{d:StaticResource ThemeColor}" FontSize="14"  IsVisible="{Binding IsLoadMoreVisible}"
+                       FontFamily="{StaticResource Montserrat_Medium_Key}" Command="{Binding LoadMoreItemsCommand}"
+                           VerticalOptions="End" Margin="0,0,0,10" BackgroundColor="Transparent"/>
+                        </StackLayout>
+                    </ScrollView>
+                    <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="True"
+                                       IsVisible="{Binding IsFetching}"/>
+                </Grid>
+                
+                <commonviews:BottomLayoutView Grid.Row="3" HeightRequest="50"></commonviews:BottomLayoutView>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -387,4 +387,7 @@
   <data name="Yearly" xml:space="preserve">
     <value>Yearly</value>
   </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Load More</value>
+  </data>
 </root>

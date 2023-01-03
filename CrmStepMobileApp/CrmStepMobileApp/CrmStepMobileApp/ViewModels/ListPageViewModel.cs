@@ -81,8 +81,19 @@ namespace CrmStepMobileApp.ViewModels
             }
         }
 
-        private ObservableCollection<List> _fieldsList;
-        public ObservableCollection<List> FieldsList
+        private bool _isLoadMoreVisible { get; set; }
+        public bool IsLoadMoreVisible
+        {
+            get => _isLoadMoreVisible;
+            set
+            {
+                _isLoadMoreVisible = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private List<List> _fieldsList { get; set; }
+        public List<List> FieldsList
         {
             get => _fieldsList;
             set
@@ -92,9 +103,8 @@ namespace CrmStepMobileApp.ViewModels
             }
         }
 
-
-        private ObservableCollection<List> _fieldsListComplete;
-        public ObservableCollection<List> FieldsListComplete
+        private List<List> _fieldsListComplete { get; set; }
+        public List<List> FieldsListComplete
         {
             get => _fieldsListComplete;
             set
@@ -103,7 +113,6 @@ namespace CrmStepMobileApp.ViewModels
                 RaisePropertyChanged();
             }
         }
-
 
         public RelayCommand ClearTextCommand => new RelayCommand(ClearTextClick);
         private void ClearTextClick()
@@ -114,7 +123,7 @@ namespace CrmStepMobileApp.ViewModels
                 return;
             }
             SearchText = String.Empty;
-            LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.None;
+            //LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.None;
 
             Page = 1;
             TotalFetchedReults = 0;
@@ -124,10 +133,10 @@ namespace CrmStepMobileApp.ViewModels
             {
                 FieldsList.Clear();
             }
-            FieldsList = new ObservableCollection<List>();
-            FieldsListComplete = new ObservableCollection<List>();
-
-            LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.Auto;
+            FieldsList = new List<List>();
+            FieldsListComplete = new List<List>();
+            fetchData();
+            //LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.Auto;
         }
         public RelayCommand SearchCommand => new RelayCommand(SearchFromAPI);
         private void SearchFromAPI()
@@ -136,7 +145,7 @@ namespace CrmStepMobileApp.ViewModels
             {
                 return;
             }
-            LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.None;
+            //LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.None;
             Page = 1;
             TotalFetchedReults = 0;
             StaticData.TotalExpectedReults = -1;
@@ -145,9 +154,10 @@ namespace CrmStepMobileApp.ViewModels
             {
                 FieldsList.Clear();
             }
-            FieldsList = new ObservableCollection<List>();
-            FieldsListComplete = new ObservableCollection<List>();
-            LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.Auto;
+            FieldsList = new List<List>();
+            FieldsListComplete = new List<List>();
+            fetchData();
+            //LoadMore = Syncfusion.ListView.XForms.LoadMoreOption.Auto;
         }
 
         public RelayCommand LoadMoreItemsCommand => new RelayCommand(fetchData, CanLoadMoreItems);
@@ -169,14 +179,24 @@ namespace CrmStepMobileApp.ViewModels
                 {
                     FormsListApiModel = result;
                     var list = result.data.list.OrderByDescending(s => Convert.ToDateTime(s.CreatedOn));
-
+                    var fList = new List<List>();
+                    foreach (var item in FieldsList)
+                    {
+                        fList.Add(item);
+                    }
                     foreach (var item in list)
                     {
-                        FieldsList.Add(item);
+                        fList.Add(item);
                         FieldsListComplete.Add(item);
                     }
+                    FieldsList = fList;
+                    FieldsListComplete = fList;
                     Page++;
                     TotalFetchedReults += list.Count();
+                    if (StaticData.TotalExpectedReults == TotalFetchedReults)
+                        IsLoadMoreVisible = false;
+                    else
+                        IsLoadMoreVisible = true;
                 }
                 else
                 {
@@ -258,7 +278,7 @@ namespace CrmStepMobileApp.ViewModels
                     }
 
 
-                    FieldsList = new ObservableCollection<List>(list);// list.ForEach(s => FieldsList.Add(s));
+                    FieldsList = list.ToList();// list.ForEach(s => FieldsList.Add(s));
                 }
             }
             catch (Exception ex)
@@ -329,15 +349,16 @@ namespace CrmStepMobileApp.ViewModels
 
                 var page = Enum.GetName(typeof(FormType), StaticData.CurrentFormType);
                 PageTitle = crmLng.ResourceManager.GetString(page);
-                FieldsList = new ObservableCollection<List>();
-                FieldsListComplete = new ObservableCollection<List>();
+                FieldsList = new List<List>();
+                FieldsListComplete = new List<List>();
 
                 SearchText = String.Empty;
 
+                LoadMoreItemsCommand.Execute(null);
             }
             catch (Exception ex)
             {
-                FieldsList = new ObservableCollection<List>();
+                FieldsList = new List<List>();
             }
 
 

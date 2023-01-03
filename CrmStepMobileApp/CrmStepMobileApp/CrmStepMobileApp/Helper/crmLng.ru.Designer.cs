@@ -19,14 +19,14 @@ namespace CrmStepMobileApp.Helper {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Build.Tasks.StronglyTypedResourceBuilder", "15.1.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class crmLng {
+    internal class crmLng_ru {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal crmLng() {
+        internal crmLng_ru() {
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace CrmStepMobileApp.Helper {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrmStepMobileApp.Helper.crmLng", typeof(crmLng).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrmStepMobileApp.Helper.crmLng.ru", typeof(crmLng_ru).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,7 +58,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actions.
+        ///   Looks up a localized string similar to действия.
         /// </summary>
         internal static string Actions {
             get {
@@ -67,7 +67,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to добавлять.
         /// </summary>
         internal static string Add {
             get {
@@ -76,7 +76,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address From.
+        ///   Looks up a localized string similar to Адрес от.
         /// </summary>
         internal static string AddressFrom {
             get {
@@ -85,7 +85,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address To.
+        ///   Looks up a localized string similar to Отправить.
         /// </summary>
         internal static string AddressTo {
             get {
@@ -94,7 +94,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount.
+        ///   Looks up a localized string similar to количество.
         /// </summary>
         internal static string Amount {
             get {
@@ -103,7 +103,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount With Vat.
+        ///   Looks up a localized string similar to Адрес с НДС.
         /// </summary>
         internal static string AmountWithVat {
             get {
@@ -112,7 +112,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assigned For.
+        ///   Looks up a localized string similar to Модуль.
         /// </summary>
         internal static string AssignedFor {
             get {
@@ -121,7 +121,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign To.
+        ///   Looks up a localized string similar to Назначить для.
         /// </summary>
         internal static string AssignTo {
             get {
@@ -130,7 +130,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Отмена.
         /// </summary>
         internal static string Cancel {
             get {
@@ -139,7 +139,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Companies.
+        ///   Looks up a localized string similar to Компании.
         /// </summary>
         internal static string Companies {
             get {
@@ -148,7 +148,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company.
+        ///   Looks up a localized string similar to Компания.
         /// </summary>
         internal static string Company {
             get {
@@ -157,7 +157,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company Name.
+        ///   Looks up a localized string similar to Название компании.
         /// </summary>
         internal static string CompanyName {
             get {
@@ -166,7 +166,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact.
+        ///   Looks up a localized string similar to Контакт.
         /// </summary>
         internal static string Contact {
             get {
@@ -175,7 +175,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contacts.
+        ///   Looks up a localized string similar to Контакты.
         /// </summary>
         internal static string Contacts {
             get {
@@ -184,7 +184,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Count.
+        ///   Looks up a localized string similar to подсчитывать.
         /// </summary>
         internal static string Count {
             get {
@@ -193,7 +193,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created On.
+        ///   Looks up a localized string similar to создано.
         /// </summary>
         internal static string CreatedOn {
             get {
@@ -202,7 +202,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customer Birthday.
+        ///   Looks up a localized string similar to Дни рождения.
         /// </summary>
         internal static string CustomerBirthday {
             get {
@@ -211,7 +211,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily.
+        ///   Looks up a localized string similar to Ежедневно.
         /// </summary>
         internal static string Daily {
             get {
@@ -220,7 +220,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dashboard.
+        ///   Looks up a localized string similar to Дашборд.
         /// </summary>
         internal static string Dashboard {
             get {
@@ -229,7 +229,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Day.
+        ///   Looks up a localized string similar to День.
         /// </summary>
         internal static string Day {
             get {
@@ -238,7 +238,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Days.
+        ///   Looks up a localized string similar to Дня.
         /// </summary>
         internal static string Days {
             get {
@@ -247,7 +247,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deals.
+        ///   Looks up a localized string similar to Сделки.
         /// </summary>
         internal static string Deals {
             get {
@@ -256,7 +256,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deal Stage.
+        ///   Looks up a localized string similar to Этап сделки.
         /// </summary>
         internal static string DealStage {
             get {
@@ -265,7 +265,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Описание.
         /// </summary>
         internal static string Description {
             get {
@@ -274,7 +274,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document Added Successully !.
+        ///   Looks up a localized string similar to Документ сохранен.
         /// </summary>
         internal static string DocumentAddedSuccessully {
             get {
@@ -283,7 +283,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Documents.
+        ///   Looks up a localized string similar to документы.
         /// </summary>
         internal static string Documents {
             get {
@@ -292,7 +292,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email.
+        ///   Looks up a localized string similar to Эл. адрес.
         /// </summary>
         internal static string Email {
             get {
@@ -301,7 +301,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EndsOn.
+        ///   Looks up a localized string similar to Заканчивается.
         /// </summary>
         internal static string EndsOn {
             get {
@@ -310,7 +310,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter both fields to continue.
+        ///   Looks up a localized string similar to Пожалуйста, введите оба поля, чтобы продолжить.
         /// </summary>
         internal static string EnterBothFields {
             get {
@@ -319,7 +319,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Event cannot be added.
+        ///   Looks up a localized string similar to События не могут быть добавлены.
         /// </summary>
         internal static string EventCannotBeAdded {
             get {
@@ -328,7 +328,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events.
+        ///   Looks up a localized string similar to События.
         /// </summary>
         internal static string Events {
             get {
@@ -337,7 +337,16 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Event Updated.
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string EventUpda {
+            get {
+                return ResourceManager.GetString("EventUpda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to События обновлены.
         /// </summary>
         internal static string EventUpdated {
             get {
@@ -346,7 +355,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File.
+        ///   Looks up a localized string similar to файл.
         /// </summary>
         internal static string File {
             get {
@@ -355,7 +364,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FileName.
+        ///   Looks up a localized string similar to имя файла.
         /// </summary>
         internal static string FileName {
             get {
@@ -364,7 +373,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First name.
+        ///   Looks up a localized string similar to Имя.
         /// </summary>
         internal static string FirstName {
             get {
@@ -373,7 +382,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Главная.
         /// </summary>
         internal static string Home {
             get {
@@ -382,7 +391,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hot Sale Products.
+        ///   Looks up a localized string similar to Горячие продажи товаров.
         /// </summary>
         internal static string HotSaleProducts {
             get {
@@ -391,7 +400,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ID.
+        ///   Looks up a localized string similar to Идентификатор.
         /// </summary>
         internal static string ID {
             get {
@@ -400,7 +409,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incomplete Events.
+        ///   Looks up a localized string similar to Незавершенные события.
         /// </summary>
         internal static string IncompleteEvents {
             get {
@@ -409,7 +418,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is All Day.
+        ///   Looks up a localized string similar to Весь день.
         /// </summary>
         internal static string IsAllDay {
             get {
@@ -418,7 +427,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Completed.
+        ///   Looks up a localized string similar to Завершенный.
         /// </summary>
         internal static string IsCompleted {
             get {
@@ -427,7 +436,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last name.
+        ///   Looks up a localized string similar to Фамилия.
         /// </summary>
         internal static string LastName {
             get {
@@ -436,7 +445,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leads.
+        ///   Looks up a localized string similar to Лиды.
         /// </summary>
         internal static string Leads {
             get {
@@ -445,7 +454,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading.
+        ///   Looks up a localized string similar to загрузка.
         /// </summary>
         internal static string Loading {
             get {
@@ -454,7 +463,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load More.
+        ///   Looks up a localized string similar to Загрузи больше.
         /// </summary>
         internal static string LoadMore {
             get {
@@ -463,7 +472,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location.
+        ///   Looks up a localized string similar to Место расположения.
         /// </summary>
         internal static string Location {
             get {
@@ -472,7 +481,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout.
+        ///   Looks up a localized string similar to Выйти.
         /// </summary>
         internal static string Logout {
             get {
@@ -481,7 +490,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mobile.
+        ///   Looks up a localized string similar to Мобильный.
         /// </summary>
         internal static string Mobile {
             get {
@@ -490,7 +499,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Month.
+        ///   Looks up a localized string similar to Месяц.
         /// </summary>
         internal static string Month {
             get {
@@ -499,7 +508,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Monthly.
+        ///   Looks up a localized string similar to ежемесячно.
         /// </summary>
         internal static string Monthly {
             get {
@@ -508,7 +517,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to שם.
+        ///   Looks up a localized string similar to имя.
         /// </summary>
         internal static string Name {
             get {
@@ -517,7 +526,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Never.
+        ///   Looks up a localized string similar to Никогда.
         /// </summary>
         internal static string Never {
             get {
@@ -526,7 +535,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No New Notifications.
+        ///   Looks up a localized string similar to Нет новых оповещений.
         /// </summary>
         internal static string NoNewNotifications {
             get {
@@ -535,7 +544,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have permissions to continue.
+        ///   Looks up a localized string similar to У вас нет разрешения на продолжение..
         /// </summary>
         internal static string NoPermissions {
             get {
@@ -553,7 +562,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to пароль.
         /// </summary>
         internal static string Password {
             get {
@@ -562,7 +571,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phone.
+        ///   Looks up a localized string similar to Телефон.
         /// </summary>
         internal static string Phone {
             get {
@@ -571,7 +580,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Priorty.
+        ///   Looks up a localized string similar to приоритет.
         /// </summary>
         internal static string Priorty {
             get {
@@ -580,7 +589,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project.
+        ///   Looks up a localized string similar to проект.
         /// </summary>
         internal static string Project {
             get {
@@ -589,7 +598,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reccurence Rule is invalid.
+        ///   Looks up a localized string similar to Повторите правило недействительным.
         /// </summary>
         internal static string ReccurenceRuleNotValid {
             get {
@@ -598,7 +607,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recent Deals.
+        ///   Looks up a localized string similar to Недавние предложения.
         /// </summary>
         internal static string RecentDeals {
             get {
@@ -607,7 +616,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recent Leads.
+        ///   Looks up a localized string similar to Последние лиды.
         /// </summary>
         internal static string RecentLeads {
             get {
@@ -616,7 +625,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Successfully added record!.
+        ///   Looks up a localized string similar to Запись успешно добавлена !.
         /// </summary>
         internal static string RecordAddedSuccess {
             get {
@@ -625,7 +634,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Repeat.
+        ///   Looks up a localized string similar to Повторение.
         /// </summary>
         internal static string Repeat {
             get {
@@ -634,7 +643,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Responsible Person.
+        ///   Looks up a localized string similar to Пользователь.
         /// </summary>
         internal static string ResponsiblePerson {
             get {
@@ -643,16 +652,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string s {
-            get {
-                return ResourceManager.GetString("s", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to Сохранить.
         /// </summary>
         internal static string Save {
             get {
@@ -661,7 +661,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scheduler.
+        ///   Looks up a localized string similar to Дневник.
         /// </summary>
         internal static string Scheduler {
             get {
@@ -670,7 +670,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select.
+        ///   Looks up a localized string similar to Выбрать.
         /// </summary>
         internal static string Select {
             get {
@@ -679,7 +679,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select View.
+        ///   Looks up a localized string similar to Выбрать.
         /// </summary>
         internal static string SelectView {
             get {
@@ -688,7 +688,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show All.
+        ///   Looks up a localized string similar to показать все.
         /// </summary>
         internal static string ShowAll {
             get {
@@ -697,7 +697,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Site Orders.
+        ///   Looks up a localized string similar to Заказы сайта.
         /// </summary>
         internal static string SiteOrders {
             get {
@@ -706,16 +706,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string ss {
-            get {
-                return ResourceManager.GetString("ss", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StartsOn.
+        ///   Looks up a localized string similar to Начинается на.
         /// </summary>
         internal static string StartsOn {
             get {
@@ -724,7 +715,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
+        ///   Looks up a localized string similar to Статус.
         /// </summary>
         internal static string Status {
             get {
@@ -733,7 +724,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subject.
+        ///   Looks up a localized string similar to Тема.
         /// </summary>
         internal static string Subject {
             get {
@@ -742,7 +733,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Switch.
+        ///   Looks up a localized string similar to переключатель.
         /// </summary>
         internal static string Switch {
             get {
@@ -751,7 +742,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Switch Language.
+        ///   Looks up a localized string similar to переключить язык.
         /// </summary>
         internal static string SwitchLanguage {
             get {
@@ -760,7 +751,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take Photo.
+        ///   Looks up a localized string similar to Сфотографировать.
         /// </summary>
         internal static string TakePhoto {
             get {
@@ -769,7 +760,16 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tickets.
+        ///   Looks up a localized string similar to russ.
+        /// </summary>
+        internal static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кейсы.
         /// </summary>
         internal static string Tickets {
             get {
@@ -778,7 +778,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title.
+        ///   Looks up a localized string similar to заглавие.
         /// </summary>
         internal static string Title {
             get {
@@ -787,7 +787,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Today Events.
+        ///   Looks up a localized string similar to Сегодняшние события.
         /// </summary>
         internal static string TodayEvents {
             get {
@@ -796,7 +796,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Until.
+        ///   Looks up a localized string similar to до того как.
         /// </summary>
         internal static string Until {
             get {
@@ -805,7 +805,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updated On.
+        ///   Looks up a localized string similar to Обновление.
         /// </summary>
         internal static string UpdatedOn {
             get {
@@ -814,7 +814,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload.
+        ///   Looks up a localized string similar to загрузка.
         /// </summary>
         internal static string Upload {
             get {
@@ -823,7 +823,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User.
+        ///   Looks up a localized string similar to пользователь.
         /// </summary>
         internal static string User {
             get {
@@ -832,7 +832,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username.
+        ///   Looks up a localized string similar to имя пользователя.
         /// </summary>
         internal static string Username {
             get {
@@ -841,7 +841,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Week.
+        ///   Looks up a localized string similar to Неделя.
         /// </summary>
         internal static string Week {
             get {
@@ -850,7 +850,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weekly.
+        ///   Looks up a localized string similar to еженедельно.
         /// </summary>
         internal static string Weekly {
             get {
@@ -859,7 +859,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work Week.
+        ///   Looks up a localized string similar to рабочая неделя.
         /// </summary>
         internal static string WorkWeek {
             get {
@@ -868,7 +868,7 @@ namespace CrmStepMobileApp.Helper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yearly.
+        ///   Looks up a localized string similar to каждый год.
         /// </summary>
         internal static string Yearly {
             get {

@@ -76,8 +76,8 @@ namespace CrmStepMobileApp.Views
                 viewModel.FieldsList.Clear();
             }
 
-            viewModel.FieldsList = new ObservableCollection<List>();
-            viewModel.FieldsListComplete = new ObservableCollection<List>();
+            viewModel.FieldsList = new List<List>();
+            viewModel.FieldsListComplete = new List<List>();
 
             if (sender is CustomEntry customEntry)
             {
@@ -170,8 +170,8 @@ namespace CrmStepMobileApp.Views
                 viewModel.FieldsList.Clear();
             }
 
-            viewModel.FieldsList = new ObservableCollection<List>();
-            viewModel.FieldsListComplete = new ObservableCollection<List>();
+            viewModel.FieldsList = new List<List>();
+            viewModel.FieldsListComplete = new List<List>();
         }
     }
 }

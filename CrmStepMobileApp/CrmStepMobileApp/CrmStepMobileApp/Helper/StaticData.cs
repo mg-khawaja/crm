@@ -83,8 +83,8 @@ namespace CrmStepMobileApp.Helper
                                             $"Page: Static Data\n" +
                                             $"Method: IsSessionExpired\n" +
                                             $"Exception: IsSessionExpired\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
             }
@@ -137,8 +137,8 @@ namespace CrmStepMobileApp.Helper
                                             $"Page: Static Data\n" +
                                             $"Method: RefreshToken\n" +
                                             $"Exception: Refresh token\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
             }

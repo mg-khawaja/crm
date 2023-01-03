@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace CrmStepMobileApp.Services
 {
 
-   public class HttpClientBase :ApiBase
+    public class HttpClientBase : ApiBase
     {
         public string BaseUrl = "https://api.crmstep.com/";
 
@@ -23,30 +23,26 @@ namespace CrmStepMobileApp.Services
             string resultStr = "";
             try
             {
+                var httpClient = new HttpClient();
 
-                using (var httpClient = new HttpClient())
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri(BaseUrl);
+
+                if (accessToken != "")
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    response = await httpClient.PostAsync(endpoint, new StringContent(jsonobject, Encoding.UTF8, "application/json"));
-                    resultStr = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(resultStr);
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
                 }
-
-
+                response = await httpClient.PostAsync(endpoint, new StringContent(jsonobject, Encoding.UTF8, "application/json"));
+                resultStr = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(resultStr);
             }
             catch (Exception ex)
             {
@@ -67,8 +63,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
                 throw;
@@ -81,27 +77,25 @@ namespace CrmStepMobileApp.Services
             string resultStr = "";
             try
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri(BaseUrl);
+                if (accessToken != "")
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    resultStr = await response.Content.ReadAsStringAsync();
-                    var json = JsonConvert.DeserializeObject<T>(resultStr);
-                    return json;
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
                 }
+                response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                resultStr = await response.Content.ReadAsStringAsync();
+                var json = JsonConvert.DeserializeObject<T>(resultStr);
+                return json;
             }
             catch (Exception ex)
             {
@@ -122,8 +116,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
                 throw;
@@ -138,27 +132,25 @@ namespace CrmStepMobileApp.Services
             string resultStr = "";
             try
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri(BaseUrl);
+                if (accessToken != "")
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    response = await httpClient.DeleteAsync(endpoint).ConfigureAwait(false);
-                    resultStr = await response.Content.ReadAsStringAsync();
-                    var json = JsonConvert.DeserializeObject<T>(resultStr);
-                    return json;
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
                 }
+                response = await httpClient.DeleteAsync(endpoint).ConfigureAwait(false);
+                resultStr = await response.Content.ReadAsStringAsync();
+                var json = JsonConvert.DeserializeObject<T>(resultStr);
+                return json;
             }
             catch (Exception ex)
             {
@@ -179,8 +171,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
                 throw;
@@ -195,26 +187,24 @@ namespace CrmStepMobileApp.Services
             string resultStr = "";
             try
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri(BaseUrl);
+                if (accessToken != "")
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    resultStr = await response.Content.ReadAsStringAsync();
-                    return resultStr;
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
                 }
+                response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                resultStr = await response.Content.ReadAsStringAsync();
+                return resultStr;
             }
             catch (Exception ex)
             {
@@ -235,8 +225,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
             }
@@ -255,24 +245,22 @@ namespace CrmStepMobileApp.Services
                     new KeyValuePair<string, string>("html", html)
                 });
 
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri("https://api.html2pdf.app/");
+
+                //var encodedItems = form.Select(i => WebUtility.UrlEncode(i.Key) + "=" + WebUtility.UrlEncode(i.Value));
+                //var encodedContent = new StringContent(String.Join("&", encodedItems), null, "application/x-www-form-urlencoded");
+
+                var response = await httpClient.PostAsync(endpoint, form);
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri("https://api.html2pdf.app/");
-
-                    //var encodedItems = form.Select(i => WebUtility.UrlEncode(i.Key) + "=" + WebUtility.UrlEncode(i.Value));
-                    //var encodedContent = new StringContent(String.Join("&", encodedItems), null, "application/x-www-form-urlencoded");
-
-                    var response = await httpClient.PostAsync(endpoint, form);
-                    if (response.StatusCode != HttpStatusCode.OK)
-                    {
-                        return null;
-                    }
-                    var result = await response.Content.ReadAsByteArrayAsync();
-                    //     var mybytearray = Convert.FromBase64String(result);
-                    return result;
+                    return null;
                 }
+                var result = await response.Content.ReadAsByteArrayAsync();
+                //     var mybytearray = Convert.FromBase64String(result);
+                return result;
             }
             catch (Exception ex)
             {
@@ -288,26 +276,24 @@ namespace CrmStepMobileApp.Services
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.BaseAddress = new Uri(BaseUrl);
+                if (accessToken != "")
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    var result = await response.Content.ReadAsByteArrayAsync();
-                    return result;
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
                 }
+                response = await httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                var result = await response.Content.ReadAsByteArrayAsync();
+                return result;
             }
             catch (Exception ex)
             {
@@ -327,8 +313,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
                 throw;
@@ -344,29 +330,27 @@ namespace CrmStepMobileApp.Services
             string resultStr = "";
             try
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
+                httpClient.BaseAddress = new Uri(BaseUrl);
+                if (accessToken != "")
                 {
-                    httpClient.BaseAddress = new Uri(BaseUrl);
-                    if (accessToken != "")
+                    var res = StaticData.IsSessionExpired();
+                    if (res)
                     {
-                        var res = StaticData.IsSessionExpired();
-                        if (res)
-                        {
-                            var newTkn = await StaticData.RefreshToken();
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
-                        }
-                        else
-                            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                        var newTkn = await StaticData.RefreshToken();
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + newTkn);
                     }
-                    using (var content = new MultipartFormDataContent())
-                    {
-                        content.Add(new StreamContent(new MemoryStream(file)), "file", name);
-                        response = await httpClient.PostAsync(endpoint, content);
-                        resultStr = await response.Content.ReadAsStringAsync();
-                        var json = JsonConvert.DeserializeObject<T>(resultStr);
-                        return json;
+                    else
+                        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                }
+                using (var content = new MultipartFormDataContent())
+                {
+                    content.Add(new StreamContent(new MemoryStream(file)), "file", name);
+                    response = await httpClient.PostAsync(endpoint, content);
+                    resultStr = await response.Content.ReadAsStringAsync();
+                    var json = JsonConvert.DeserializeObject<T>(resultStr);
+                    return json;
 
-                    }
                 }
             }
             catch (Exception ex)
@@ -388,8 +372,8 @@ namespace CrmStepMobileApp.Services
                                             $"Page: HttpClientBase\n" +
                                             $"endpoint: {endpoint}\n" +
                                             $"Exception: API call\n" +
-                                            $"StackTrace: {ex.StackTrace}\n", "event log.txt"+
-                                            $"{logFile} \n" )
+                                            $"StackTrace: {ex.StackTrace}\n"+
+                                            $"{logFile} \n", "event log.txt")
                                         ,
                                     });
                 throw;
